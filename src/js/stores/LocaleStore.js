@@ -19,13 +19,15 @@ var langLocaleMap = {
   fr: 'fr_FR',
   de: 'de_DE',
   pt: 'pt_BR',
+  ro: 'ro',
   ru: 'ru_RU',
   uk: 'uk',
   vi: 'vi',
   sl: 'sl_SI',
   pl: 'pl',
   it: 'it_IT',
-  ta: 'ta_IN'
+  ta: 'ta_IN',
+  tr: 'tr_TR',
 };
 
 var headerLocaleMap = {
@@ -35,7 +37,8 @@ var headerLocaleMap = {
   'es-MX': 'es_MX',
   'es-ES': 'es_ES',
   'it-IT': 'it_IT',
-  'sl-SI': 'sl_SI'
+  'sl-SI': 'sl_SI',
+  'tr-TR': 'tr_TR',
 };
 
 var supportedLocalesList = Object.values(langLocaleMap)

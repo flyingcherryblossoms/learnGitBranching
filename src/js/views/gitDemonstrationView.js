@@ -20,7 +20,8 @@ var GitDemonstrationView = ContainedBase.extend({
   template: _.template($('#git-demonstration-view').html()),
 
   events: {
-    'click div.command > p.uiButton': 'positive'
+    'click div.command > p.uiButton:not([target="reset"])': 'positive',
+    'click div.command > p[target="reset"]': 'onResetButtonClick',
   },
 
   initialize: function(options) {
@@ -59,6 +60,8 @@ var GitDemonstrationView = ContainedBase.extend({
     this.navEvents = Object.assign({}, Backbone.Events);
     this.navEvents.on('positive', this.positive, this);
     this.navEvents.on('negative', this.negative, this);
+    this.navEvents.on('exit', this.exit, this);
+    this.navEvents.on('onResetButtonClick', this.onResetButtonClick, this);
     this.keyboardListener = new KeyboardListener({
       events: this.navEvents,
       aliasMap: {
@@ -77,9 +80,14 @@ var GitDemonstrationView = ContainedBase.extend({
     }
   },
 
+  exit: function() {
+    alert('exittt');
+  },
+
   receiveMetaNav: function(navView, metaContainerView) {
     var _this = this;
     navView.navEvents.on('positive', this.positive, this);
+    navView.navEvents.on('exit', this.exit, this);
     this.metaContainerView = metaContainerView;
   },
 
@@ -137,6 +145,11 @@ var GitDemonstrationView = ContainedBase.extend({
     }
     this.demonstrated = true;
     this.demonstrate();
+  },
+
+  onResetButtonClick: function() {
+    this.takeControl();
+    this.reset();
   },
 
   demonstrate: function() {

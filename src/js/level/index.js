@@ -264,6 +264,7 @@ var Level = Sandbox.extend({
     var toIssue = this.level.solutionCommand;
     var issueFunc = function() {
       this.isShowingSolution = true;
+      this.wasResetAfterSolved = true;
       Main.getEventBaton().trigger(
         'commandSubmitted',
         toIssue
@@ -281,25 +282,32 @@ var Level = Sandbox.extend({
       return;
     }
 
-    // allow them for force the solution
-    var confirmDefer = Q.defer();
-    var dialog = intl.getDialog(require('../dialogs/confirmShowSolution'))[0];
-    var confirmView = new ConfirmCancelTerminal({
-      markdowns: dialog.options.markdowns,
-      deferred: confirmDefer
-    });
+    // if the level doesn't have an ID, its a GIST import and
+    // we don't need to worry about the solved map regardless
+    if(this.level.id && !LevelStore.isLevelSolved(this.level.id)){
+      // allow them for force the solution
+      var confirmDefer = Q.defer();
+      var dialog = intl.getDialog(require('../dialogs/confirmShowSolution'))[0];
+      var confirmView = new ConfirmCancelTerminal({
+        markdowns: dialog.options.markdowns,
+        deferred: confirmDefer
+      });
 
-    confirmDefer.promise
-    .then(issueFunc)
-    .fail(function() {
-      command.setResult("");
-    })
-    .done(function() {
-     // either way we animate, so both options can share this logic
-     setTimeout(function() {
-        command.finishWith(deferred);
-      }, confirmView.getAnimationTime());
-    });
+      confirmDefer.promise
+      .then(issueFunc)
+      .fail(function() {
+        command.setResult("");
+      })
+      .done(function() {
+      // either way we animate, so both options can share this logic
+      setTimeout(function() {
+          command.finishWith(deferred);
+        }, confirmView.getAnimationTime());
+      });
+    } else {
+      issueFunc();
+      command.finishWith(deferred);
+    }
   },
 
   toggleObjective: function() {
@@ -469,11 +477,15 @@ var Level = Sandbox.extend({
 
   levelSolved: function(defer) {
     this.solved = true;
+  
     if (!this.isShowingSolution) {
-      LevelActions.setLevelSolved(this.level.id);
+      var numCommands = this.gitCommandsIssued.length;
+      var best = this.getNumSolutionCommands();
+      var isBest = numCommands <= best;
+  
+      LevelActions.setLevelSolved(this.level.id, isBest);
       log.levelSolved(this.getEnglishName());
     }
-
     this.hideGoal();
 
     var nextLevel = LevelStore.getNextLevel(this.level.id);

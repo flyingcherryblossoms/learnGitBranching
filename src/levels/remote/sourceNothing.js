@@ -19,13 +19,15 @@ exports.level = {
     "de_DE": "Die Quelle des Nichts",
     "ja": "無のsource",
     "fr_FR": "Source de rien du tout",
+    "ro": "Sursă goală",
     "ru_RU": "Пустой источник",
     "ko": "Source가 없다",
     "uk": "Нема джерела",
     "vi": "Không có nguồn",
     "sl_SI": "Izvor Ničesar",
     "pl": "Źródło nicości",
-    "it_IT": "Fonte del nulla"
+    "it_IT": "Fonte del nulla",
+    "tr_TR": "Hiçliğin kaynağı"
   },
   "hint": {
     "en_US": "The branch command is disabled for this level so you'll have to use fetch!",
@@ -38,13 +40,15 @@ exports.level = {
     "de_DE": "Der branch Befehl ist für diesen Level inaktiv, du musst also fetch benutzen",
     "ja": "このレベルではbranchコマンドが無効になっているのでfetchを使うしかない！",
     "fr_FR": "La commande branch est désactivée pour ce niveau, vous devrez donc utiliser fetch !",
+    "ro": "Comanda branch este dezactivată pentru acest nivel, așa că va trebui să folosești fetch!",
     "ru_RU": "Команда branch недоступна на этом упражнении, пользуйтесь командой fetch!",
     "ko": "branch 명령이 비활성화 되어있습니다. fetch를 사용해야 돼요!",
     "uk": "Команда branch недоступна на цьому уроці, користуйся командою fetch!",
     "vi": "Lệnh branch đã bị vô hiệu hóa ở cấp độ này nên bạn sẽ phải dùng fetch!",
     "sl_SI": "Ukaz za branchanje je v tej stopnji onemogočen, zato boš moral uporabiti fetch!",
     "pl": "Polecenie branch jest zablokowane na tym poziomie, musisz skorzystać z fetch!",
-    "it_IT": "Il comando branch è disabilitato per questo livello quindi dovrai usare fetch!"
+    "it_IT": "Il comando branch è disabilitato per questo livello quindi dovrai usare fetch!",
+    "tr_TR": "Bu seviyede branch komutu devre dışı bırakıldı, bu yüzden fetch kullanman gerekecek!"
   },
   "startDialog": {
     "en_US": {
@@ -581,6 +585,59 @@ exports.level = {
         }
       ]
     },
+    "ro": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "### Ciudățenii ale `<sursă>`",
+              "",
+              "Git abuzează parametrul `<sursă>` în două moduri ciudate. Aceste abuzuri vin din faptul că poți specifica tehnic \"nimic\" ca o `sursă` validă atât pentru git push cât și pentru git fetch. Modul în care specifici nimic este printr-un argument gol:",
+              "",
+              "* `git push origin :side`",
+              "* `git fetch origin :bugFix`",
+              "",
+              "Să vedem ce fac acestea..."
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Ce face git push cu \"nimic\" către o ramură remote? O șterge!"
+            ],
+            "afterMarkdowns": [
+              "Aici, am șters cu succes ramura `foo` de pe remote prin împingerea conceptului de \"nimic\" către ea. Asta are oarecum sens..."
+            ],
+            "command": "git push origin :foo",
+            "beforeCommand": "git clone; git push origin main:foo"
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "În cele din urmă, făcând fetch \"nimicului\" într-un loc local creează de fapt o ramură nouă."
+            ],
+            "afterMarkdowns": [
+              "Foarte ciudat / bizar, dar nu contează. Așa este git-ul!"
+            ],
+            "command": "git fetch origin :bar",
+            "beforeCommand": "git clone"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Aceasta este un nivel mic -- pur și simplu șterge o ramură remote și creează o nouă ramură locală folosind `git fetch` pentru a termina!"
+            ]
+          }
+        }
+      ]
+    },
     "ru_RU": {
       "childViews": [
         {
@@ -748,7 +805,7 @@ exports.level = {
             "markdowns": [
               "### Sự kỳ quặc của `<nguồn>`",
               "",
-              "Git lợi dụng tham số `<nguồn>` theo 2 cách khá dị.Hai cách lợi dụng này bắt nguồn từ thục tế là bạn có thể \"không chỉ định\" `nguồn` cho cả git push và git fetch. Bạn có thể làm điều này bằng cách để trống tham số như sau:",
+              "Git lợi dụng tham số `<nguồn>` theo 2 cách khá dị. Hai cách lợi dụng này bắt nguồn từ thực tế là bạn có thể \"không chỉ định\" `nguồn` cho cả git push và git fetch. Bạn có thể làm điều này bằng cách để trống tham số như sau:",
               "",
               "* `git push origin :side`",
               "* `git fetch origin :bugFix`",
@@ -777,7 +834,7 @@ exports.level = {
               "Cuối cùng, nạp \"không gì cả\" vào một kho chứa cục bộ thực tế sẽ tạo ra một nhánh mới"
             ],
             "afterMarkdowns": [
-              "Khá là quái và dị. Nhưng mà dó là những gì git làm!"
+              "Khá là quái và dị. Nhưng mà đó là những gì Git làm!"
             ],
             "command": "git fetch origin :bar",
             "beforeCommand": "git clone"
@@ -947,6 +1004,59 @@ exports.level = {
           "options": {
             "markdowns": [
               "Questo è un livello rapido -- elimina un ramo remoto e creane uno localmente tramite `git fetch` per terminare il livello!"
+            ]
+          }
+        }
+      ]
+    },
+    "tr_TR": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "### `<source>` Anomalleri",
+              "",
+              "Git, `<source>` parametresini iki tuhaf şekilde kullanır. Bu iki tuhaf kullanım, teknik olarak git push ve git fetch için \"hiçbir şey\"i geçerli bir `source` olarak belirleyebilmenizi sağlayan bir durumdan kaynaklanır. Hiçbir şey belirlemenin yolu, boş bir argüman kullanmaktır:",
+              "",
+              "* `git push origin :side`",
+              "* `git fetch origin :bugFix`",
+              "",
+              "Hadi bunların ne yaptığını görelim..."
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "\"Hiçbir şeyi\" uzak bir dala push yapmak ne yapar? Onu siler!"
+            ],
+            "afterMarkdowns": [
+              "İşte, \"hiçbir şeyi\" uzak bir dala push yaparak `foo` dalını başarıyla sildik. Bu bir anlam taşıyor gibi... "
+            ],
+            "command": "git push origin :foo",
+            "beforeCommand": "git clone; git push origin main:foo"
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Son olarak, \"hiçbir şey\"i bir yere fetch yapmak, aslında yeni bir dal oluşturur."
+            ],
+            "afterMarkdowns": [
+              "Çok garip / tuhaf, ama neyse. Git işte böyle!"
+            ],
+            "command": "git fetch origin :bar",
+            "beforeCommand": "git clone"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Bu hızlı bir seviye -- sadece bir uzak dalı sil ve `git fetch` ile yeni bir dal oluşturmayı bitir!"
             ]
           }
         }

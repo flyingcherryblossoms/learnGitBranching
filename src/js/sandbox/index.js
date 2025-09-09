@@ -67,7 +67,8 @@ var Sandbox = Backbone.View.extend({
 
   initGitShim: function(options) {
     this.gitShim = new GitShim({
-      beforeCB: this.beforeCommandCB.bind(this)
+      beforeCB: this.beforeCommandCB.bind(this),
+      afterCB: this.afterCommandCB.bind(this)
     });
   },
 
@@ -113,12 +114,21 @@ var Sandbox = Backbone.View.extend({
   },
 
   beforeCommandCB: function(command) {
+    this._treeBeforeCommand = this.mainVis.gitEngine.printTree();
+  },
+
+  afterCommandCB: function(command) {
     this.pushUndo();
   },
 
   pushUndo: function() {
+    let currentTree = this.mainVis.gitEngine.printTree();
+    if(currentTree === this._treeBeforeCommand) {
+      return;
+    }
+
     // go ahead and push the three onto the stack
-    this.undoStack.push(this.mainVis.gitEngine.printTree());
+    this.undoStack.push(this._treeBeforeCommand);
   },
 
   undo: function(command, deferred) {
@@ -200,7 +210,8 @@ var Sandbox = Backbone.View.extend({
     var toEdit = regexResults[1] || false;
     this.levelBuilder = new LevelBuilder({
       deferred: whenBuilderOpen,
-      editLevel: toEdit
+      editLevel: toEdit,
+      skipIntro: command.attributes.rawStr.indexOf('skipIntro') !== -1,
     });
     whenBuilderOpen.promise.then(function() {
       command.finishWith(deferred);

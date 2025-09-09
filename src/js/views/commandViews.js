@@ -17,6 +17,15 @@ const autoCompleteSuggestionOrder = [
   'show solution', // above show goal since you start with a goal view
   'reset', // over reset solved
   'import level', // over import tree
+  // for the git commands, we did an analysis and got a better order.
+  // That way cherry pick is not before checkout
+  "git commit",
+  "git clone",
+  "git fakeTeamwork",
+  "git checkout",
+  "git branch",
+  "git fetch",
+  "git pull",
 ];
 
 const allCommandsSorted = autoCompleteSuggestionOrder.concat(
@@ -93,6 +102,36 @@ var CommandPromptView = Backbone.View.extend({
       }
     }
 
+    // lets also handle control + U to clear the line
+    if (e.keyCode === 85 && e.ctrlKey && e.type === 'keydown') {
+      e.preventDefault();
+      el.value = '';
+      el.selectionStart = el.selectionEnd = 0;
+    }
+
+     // handle control + W to delete up to previous word
+    const isDeleteWord = (
+      e.keyCode === 87 && e.ctrlKey && e.type === 'keydown'
+    ) || (
+      // handle alt + backspace to delete up to previous word
+      e.keyCode === 8 && e.altKey && e.type === 'keydown'
+    );
+    if (isDeleteWord) {
+      e.preventDefault();
+      const cursorPos = el.selectionStart;
+      const textBeforeCursor = el.value.substring(0, cursorPos);
+      // Find the last word boundary
+      const lastSpaceIndex = textBeforeCursor.trimEnd().lastIndexOf(' ');
+      if (lastSpaceIndex >= 0) {
+        el.value = el.value.substring(0, lastSpaceIndex + 1) + 
+                  el.value.substring(cursorPos);
+        el.selectionStart = el.selectionEnd = lastSpaceIndex + 1;
+      } else {
+        // If no space found, clear to start
+        el.value = el.value.substring(cursorPos);
+        el.selectionStart = el.selectionEnd = 0;
+      }
+    }
     this.updatePrompt(el);
   },
 

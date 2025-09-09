@@ -9,8 +9,9 @@ exports.level = {
   "startTree": "{\"branches\":{\"main\":{\"target\":\"C2\",\"id\":\"main\"},\"bugFix\":{\"target\":\"C3\",\"id\":\"bugFix\"},\"side\":{\"target\":\"C6\",\"id\":\"side\"},\"another\":{\"target\":\"C7\",\"id\":\"another\"}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"},\"C2\":{\"parents\":[\"C1\"],\"id\":\"C2\"},\"C3\":{\"parents\":[\"C1\"],\"id\":\"C3\"},\"C4\":{\"parents\":[\"C0\"],\"id\":\"C4\"},\"C5\":{\"parents\":[\"C4\"],\"id\":\"C5\"},\"C6\":{\"parents\":[\"C5\"],\"id\":\"C6\"},\"C7\":{\"parents\":[\"C5\"],\"id\":\"C7\"}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}",
   "name": {
     "en_US": "Rebasing over 9000 times",
-    "de_DE": "10000 Rebases unter dem `HEAD`",
+    "de_DE": "9000 Rebases unter dem `HEAD`",
     "es_AR": "Rebaseando más de 9000 veces",
+    "es_MX": "Rebaseando más de 9000... veces",
     "es_ES": "Rebaseando más de 9000 veces",
     "pt_BR": "Fazendo mais de 9000 rebases",
     "gl": "Facendo máis de 9000 rebases",
@@ -19,17 +20,20 @@ exports.level = {
     "ja": "9000回以上のrebase",
     "zh_CN": "多次 Rebase",
     "zh_TW": "N次Rebase",
+    "ro": "Rebase de peste 9000 ori",
     "ru_RU": "Rebase over 9000 раз",
     "uk": "Rebase over 9000 разів",
     "vi": "Rebase hơn 9000 lần",
     "sl_SI": "Več kot 9000 Rebaseov",
-    "it_IT": "Rebasing livello 8000",
-    "pl": "Rebase ponad 8000 razy"
+    "it_IT": "Rebasing livello 9000",
+    "pl": "Rebase ponad 9000 razy",
+    "tr_TR": "9000 kereden fazla rebase işlemi yapmak"
   },
   "hint": {
     "en_US": "Remember, the most efficient way might be to only update main at the end...",
     "de_DE": "Nicht vergessen: Nur den main zu aktualisieren könnte die effizienteste Möglichkeit sein ...",
     "es_AR": "Acordate, la manera más eficiente podría ser actualizar main sólo al final...",
+    "es_MX": "Recuerda, la manera más eficiente podría ser actualizar main hasta el final...",
     "es_ES": "Recuerda, la manera más eficiente podría ser actualizar main sólo al final...",
     "pt_BR": "Lembre-se, a forma mais eficiente pode ser atualizar o main por último...",
     "gl": "Lembra, a forma máis eficiente pode ser actualizar a rama main ó final...",
@@ -38,13 +42,14 @@ exports.level = {
     "ko": "아마도 main을 마지막에 업데이트하는 것이 가장 효율적인 방법일 것입니다...",
     "zh_CN": "记住，最后更新 main 分支可能是最高效的方法……",
     "zh_TW": "要記住喔! 把 main branch 留到最後更新可能是最有效率的方法。",
+    "ro": "Amintește-ți, cea mai eficientă metodă ar putea fi să actualizezi main-ul doar la final...",
     "ru_RU": "Не забудь, что лучше всего сдвинуть мастер в самом конце...",
     "uk": "Не забувай, що краще всього буде перемістити main в самому кінці... ",
-    "vi": "Hãy nhớ rằng, cách tốt nhất có lẽ là nên cuối cùng mới cập nhật nhánh `main`... ",
+    "vi": "Hãy nhớ rằng, cách tốt nhất có thể là cập nhật nhánh `main` sau cùng...",
     "sl_SI": "Pomni, morda je najbolj učinkovit način posodabljanje masterja samo na koncu ...",
-    "it_IT":
-      "Ricorda, il modo migliore potrebbe essere di aggiornare il main alla fine...",
-    "pl": "Pamiętaj, że najskuteczniejszym sposobem może być aktualizacja `main` dopiero na samym końcu..."
+    "it_IT": "Ricorda, il modo migliore potrebbe essere di aggiornare il main alla fine...",
+    "pl": "Pamiętaj, że najskuteczniejszym sposobem może być aktualizacja `main` dopiero na samym końcu...",
+    "tr_TR": "Şunu hatırlamanı isterim ki: belki de en verimli yol işin sonunda maini güncellemektir."
   },
   "startDialog": {
     "en_US": {
@@ -83,6 +88,24 @@ exports.level = {
         }
       ]
     },
+    "es_MX": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "### Rebaseando múltiples ramas",
+              "",
+              "Mira eso, ¡hay un montón de ramas aquí! Hagamos rebase de todo el trabajo de esas ramas hacia main.",
+              "",
+              "La alta dirección nos está haciendo las cosas un poco más complicadas -- quieren que nuestros commits estén todos en orden secuencial. Esto significa que nuestro árbol final tendría que tener `C7'` al final, `C6'` antes de ese, y así, todos en orden.",
+              "",
+              "Si te revuelves durante el camino, siéntete libre de usar `reset` para empezar de nuevo. ¡Asegúrate de verificar nuestra solución y ver si puedes lograrlo en un número menor de comandos!"
+            ]
+          }
+        }
+      ]
+    },
     "es_ES": {
       "childViews": [
         {
@@ -95,7 +118,7 @@ exports.level = {
               "",
               "La gente de administración nos está haciendo las cosas un poco complicadas, igual -- quieren que nuestros commits estén todos en orden secuencial. Esto significa que nuestro árbol final tendría que tener `C7` al final, `C6` antes de ese, y así siguiendo, todos en orden.",
               "",
-              "Si te haces un lío durante el proceso, siéntete libre de usar `reset` para empezar de nuevo. ¡Asegúrate de verificar tu solución y ver si puedes realizarla en un número inferior de commandos!"
+              "Si te haces un lío durante el proceso, siéntete libre de usar `reset` para empezar de nuevo. ¡Asegúrate de verificar tu solución y ver si puedes realizarla en un número inferior de comandos!"
             ]
           }
         }
@@ -199,7 +222,7 @@ exports.level = {
             "markdowns": [
               "### 多分支 rebase",
               "",
-              "哥们儿，我们准备了很多分支！咱们把这些分支 rebase 到 main 上吧。",
+              "哇，现在我们这里出现了很多分支呢！让我们把所有这些分支上所做的工作都通过 rebase 合并到 main 分支上吧。",
               "",
               "但是你的领导给你提了点要求 —— 他们希望得到有序的提交历史，也就是我们最终的结果应该是 `C6'` 在 `C7'` 上面， `C5'` 在 `C6'` 上面，依此类推。",
               "",
@@ -240,6 +263,24 @@ exports.level = {
               "윗선에서 일을 복잡하게 만드네요 -- 그 분들이 이 모든 커밋들을 순서에 맞게 정렬하라고 합니다. 그럼 결국 우리의 최종 목표 트리는 제일 아래에 `C7'` 커밋, 그 위에 `C6'` 커밋, 또 그 위에 순서대로 보여합니다.",
               "",
               "만일 작업중에 내용이 꼬인다면, `reset`이라고 쳐서 처음부터 다시 시작할 수 있습니다. 모범 답안을 확인해 보시고, 혹시 더 적은 수의 커맨드로 해결할 수 있는지 알아보세요!"
+            ]
+          }
+        }
+      ]
+    },
+    "ro": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "### Rebase mai multe ramuri",
+              "",
+              "Avem o grămadă de ramuri aici! Hai să facem rebase la tot ce s-a lucrat în aceste ramuri pe main.",
+              "",
+              "Dar șefii ne complică puțin viața -- vor ca toate commit-urile să fie în ordine secvențială. Asta înseamnă că arborele nostru final ar trebui să aibă `C7'` jos, `C6'` deasupra lui și așa mai departe, totul în ordine.",
+              "",
+              "Dacă te încurci pe parcurs, nu ezita să folosești `reset` pentru a începe de la capăt. Asigură-te că verifici soluția noastră și vezi dacă poți să o faci cu mai puține comenzi!"
             ]
           }
         }
@@ -289,16 +330,17 @@ exports.level = {
             "markdowns": [
               "### Rebase nhiều nhánh",
               "",
-              "Giời ạ, sao mà nhiều nhánh thế khôn biết! Chuyển hết chúng vào `main` thôi.",
+              "Giời ạ, sao mà nhiều nhánh thế không biết! Chuyển hết chúng vào `main` thôi.",
               "",
-              "Nhưng mà cha quản lý lại muốn oái oăm hơn cơ -- hắn muốn tất cả commit xếp thẳng hàng. Nghĩa là cây lịch sử của ta sẽ có `C7'` ở cuối, phía trên là`C6'`, và cứ thế theo đúng thứ tự.",
+              "Nhưng mà cha quản lý lại muốn oái oăm hơn cơ -- hắn muốn tất cả commit xếp thẳng hàng. Nghĩa là cây lịch sử của ta sẽ có `C7'` ở cuối, phía trên là `C6'`, và cứ thế theo đúng thứ tự.",
               "",
               "Nếu mà nhỡ may bạn làm nhầm thì có thể dùng lệnh `reset` để bắt đầu lại. Hãy nhớ đối chiếu với đáp án của chúng tôi xem bạn có thể hoàn thành với ít câu lệnh hơn không!"
             ]
           }
         }
       ]
-    }, "sl_SI": {
+    },
+    "sl_SI": {
       "childViews": [
         {
           "type": "ModalAlert",
@@ -335,22 +377,40 @@ exports.level = {
       ]
     },
     "it_IT": {
-      childViews: [
+      "childViews": [
         {
-          type: "ModalAlert",
-          options: {
-            markdowns: [
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
               "### Fare rebase con più rami",
               "",
               "Hey, qui abbiamo un bel po' di rami! Facciamo un po' di rebase di questi rami nel main.",
               "",
               "I piani alti ci stanno rendendo la vita complicata -- vogliono i commit tutti in ordine progressivo. Questo significa che alla fine il nostro albero avrà `C7'` come ultimo commit, `C6'` sopra di esso, e così via, tutto in ordine.",
               "",
-              "Se ti smarrisci lungo la via, usa `reset` senza problemi per ripartire da capo. Assicurati di raggiungere l'obiettivo e cerca di farlo con il minor numero di comandi!",
-            ],
-          },
-        },
-      ],
+              "Se ti smarrisci lungo la via, usa `reset` senza problemi per ripartire da capo. Assicurati di raggiungere l'obiettivo e cerca di farlo con il minor numero di comandi!"
+            ]
+          }
+        }
+      ]
     },
+    "tr_TR": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "### Birden fazla branch'ı rebase etmek",
+              "",
+              "Dostum, burada bir sürü branch'imiz var! Hadi tüm işlemleri bu branchlerden maine yeniden aktaralım (rebase).",
+              "",
+              "Yukarıya doğru yönetmek biraz zor gibi görünse de -- tüm commitlerin sıralı olmasını istiyorlar. Yani bu, ağacımızın son halinin en altta `C7`, onun üstünde `C6`, vs. sırayla olması gerektiği anlamına geliyor.",
+              "",
+              "Kafan karışırsa 'reset' tuşuna basarak yeniden başlamaktan çekinme. Çözümümüze göz attığından ve bu bölümü daha az komutla bitirip bitiremeyeceğini gördüğünden emin ol!"
+            ]
+          }
+        }
+      ]
+    }
   }
 };

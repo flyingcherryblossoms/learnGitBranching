@@ -30,18 +30,22 @@ exports.level = {
     "ja": "コミットをやりくりする",
     "zh_CN": "提交的技巧 #1",
     "zh_TW": "commit 的戲法",
+    "ro": "Jonglarea cu commit-uri",
     "ru_RU": "Жонглируем коммитами",
     "uk": "Жонглюємо комітами",
     "vi": "Tung hứng commit",
     "sl_SI": "Žongliranje s Commiti",
     "it_IT": "Giocoliere di commit",
     "pl": "Żonglowanie commitami",
+    "ta_IN": "Commitகளுடன் வித்தைகள்",
+    "tr_TR": "Commit'leri Şekillendirme"
   },
   "hint": {
     "en_US": "The first command is git rebase -i HEAD~2",
     "de_DE": "Der erste Befehl ist git rebase -i HEAD~2",
     "fr_FR": "La première commande est git rebase -i HEAD~2",
     "es_AR": "El primer comando es git rebase -i HEAD~2",
+    "es_MX": "El primer comando es git rebase -i HEAD~2",
     "es_ES": "El primer comando es git rebase -i HEAD~2",
     "pt_BR": "O primeiro comando é git rebase -i HEAD~2",
     "gl": "O primeiro comando é git rebase -i HEAD~2",
@@ -49,12 +53,15 @@ exports.level = {
     "ko": "첫번째 명령은 git rebase -i HEAD~2 입니다",
     "zh_CN": "第一个命令是 `git rebase -i HEAD~2`",
     "zh_TW": "第一個命令是 'git rebase -i HEAD~2'",
+    "ro": "Prima comandă este git rebase -i HEAD~2",
     "ru_RU": "Первой командой должна быть git rebase -i HEAD~2",
     "uk": "Перша команда має бути git rebase -i HEAD~2",
     "vi": "Lệnh đầu tiên là git rebase -i HEAD~2",
     "sl_SI": "Prvi ukaz je git rebase -i HEAD~2.",
     "it_IT": "Il primo comando è git rebase -i HEAD~2",
     "pl": "Pierwsze polecenie to: git rebase -i HEAD~2",
+    "ta_IN": "முதலில் கொடுக்கவேண்டிய கட்டளை git rebase -i HEAD~2",
+    "tr_TR": "İlk komutunuz git rebase -i HEAD~2"
   },
   "startDialog": {
     "en_US": {
@@ -123,7 +130,7 @@ exports.level = {
               "Ceci étant dit, je peux comparer le résultat avec la structure et les différentes apostrophes. Tant que votre arbre `main` a la même structure et les différentes apostrophes le niveau sera considéré comme réussi."
             ]
           }
-        },
+        }
       ]
     },
     "es_AR": {
@@ -158,7 +165,7 @@ exports.level = {
               "Habiendo dicho eso, puedo comparar los niveles basándome ahora en la estructura y las diferencias relativas de apóstrofes. Mientras que tu rama `main` tenga la misma estructura y diferencias relativas de apóstrofes, te voy a dar el puntaje completo."
             ]
           }
-        },
+        }
       ]
     },
     "es_ES": {
@@ -193,7 +200,7 @@ exports.level = {
               "Habiendo dicho eso, puedo comparar los niveles basándome ahora en la estructura y las diferencias relativas de apóstrofes. Mientras que tu rama `main` tenga la misma estructura y diferencias relativas de apóstrofes, te voy a dar el puntaje completo."
             ]
           }
-        },
+        }
       ]
     },
     "es_MX": {
@@ -228,7 +235,7 @@ exports.level = {
               "Habiendo dicho eso, puedo comparar los niveles basándome ahora en la estructura y las diferencias relativas de apóstrofes. Mientras que tu rama `main` tenga la misma estructura y diferencias relativas de apóstrofes te voy a dar el puntaje completo."
             ]
           }
-        },
+        }
       ]
     },
     "pt_BR": {
@@ -263,7 +270,7 @@ exports.level = {
               "Tendo dito isto, posso avaliar a resposta baseado na estrutura e nas diferenças relativas de número de apóstrofos. Desde que o ramo `main` da sua árvore tenha a mesma estrutura, e o número de apóstrofos seja igual a menos de uma constante, darei a você todos os pontos para esta tarefa."
             ]
           }
-        },
+        }
       ]
     },
     "gl": {
@@ -298,7 +305,7 @@ exports.level = {
               "Contado todo esto, a resposta valídase baseándose na estructura e nos diferentes apóstrofes. Cando a rama `main` teña a mesma estructura, e o número de apóstrofos sexa igual, obterás todos os puntos da tarefa."
             ]
           }
-        },
+        }
       ]
     },
     "de_DE": {
@@ -333,7 +340,7 @@ exports.level = {
               "Zu guter Letzt noch eine Bemerkung: Ich kann Level nur auf Struktur und Apostroph-Differenz prüfen. So lange wie dein `main` am Ende dieselbe Struktur und Apostroph-Differenz aufweist wie der Ziel-`main`, ist der Level bestanden."
             ]
           }
-        },
+        }
       ]
     },
     "ja": {
@@ -366,7 +373,7 @@ exports.level = {
               "最後に、ゴール時点での状態に気を付けてください。今回2回ほどコミットを動かしますから、コミットへのポインタにはアポストロフィ（'）が追加されます。commit --amendコマンドの実行でできたコミットには更にもう1つのアポストロフィが追加されます。 "
             ]
           }
-        },
+        }
       ]
     },
     "zh_CN": {
@@ -433,7 +440,7 @@ exports.level = {
               "啊！最後還要提醒你一下最後所產生的 commit tree，因為我們把 commit 移動了兩次，所以會分別產生一個 apostrophe(單引號） commit。還有一個 apostrophe commit 是因為我們修改 commit 而加進來的。"
             ]
           }
-        },
+        }
       ]
     },
     "ko": {
@@ -466,7 +473,41 @@ exports.level = {
               "최종적으로, 목표 결과를 눈여겨 보세요 -- 우리가 커밋을 두 번 옮겼기 때문에, 두 커밋 모두 따옴표 표시가 붙어있습니다. 정정한(amend) 커밋은 따옴표가 추가로 하나 더 붙어있습니다."
             ]
           }
+        }
+      ]
+    },
+    "ro": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Jonglarea cu commit-uri",
+              "",
+              "Iată o altă situație care apare destul de frecvent. Ai unele modificări (`newImage`) și un alt set de modificări (`caption`) care sunt legate între ele, astfel încât sunt stivuite una peste alta în repozitoriul tău (adică una după alta).",
+              "",
+              "Partea complicată este că uneori trebuie să faci o mică modificare la un commit mai vechi. În acest caz, echipa de design vrea să schimbăm puțin dimensiunile lui `newImage`, chiar dacă acel commit este deja în istoria noastră!"
+            ]
+          }
         },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Vom depăși această dificultate făcând următoarele:",
+              "",
+              "* Vom reordona commit-urile astfel încât cel pe care vrem să-l modificăm să fie cel mai recent cu `git rebase -i`",
+              "* Vom folosi `git commit --amend` pentru a face mica modificare",
+              "* Apoi vom reordona commit-urile înapoi cum erau anterior cu `git rebase -i`",
+              "* În final, vom muta `main` în această parte actualizată a arborelui pentru a termina nivelul (folosind metoda pe care o preferi)",
+              "",
+              "Există multe moduri de a atinge acest obiectiv general (știu că te gândești la cherry-pick), și vom vedea mai multe dintre ele mai târziu, dar pentru moment să ne concentrăm pe această tehnică.",
+              "În cele din urmă, fii atent la starea finală aici -- deoarece mutăm commit-urile de două ori, ambele primesc o apostrofă în plus. Încă o apostrofă este adăugată pentru commit-ul pe care îl modificăm, ceea ce ne dă forma finală a arborelui ",
+              "",
+              "Asta fiind spus, pot compara nivelurile acum pe baza structurii și diferențelor relative de apostrofă. Atâta timp cât ramura `main` a arborelui tău are aceeași structură și diferențe relative de apostrofă, îți voi da puncte maxime."
+            ]
+          }
+        }
       ]
     },
     "ru_RU": {
@@ -501,7 +542,7 @@ exports.level = {
               "Важно, чтобы совпадало не только дерево коммитов, но и количество апострофов."
             ]
           }
-        },
+        }
       ]
     },
     "uk": {
@@ -548,7 +589,7 @@ exports.level = {
               "",
               "Có một tình huống xảy ra khá thường xuyên. Bạn có vài thay đổi trên (`newImage`) và một vài thay đổi khác trên (`caption`) và chúng lại liên quan đến nhau, nên chúng nằm chồng lên nhau trong kho của bạn (một lại nối một).",
               "",
-              "Tréo ngoe là bạn lại phải điều chỉnh một chút ở commit trước. Giả sử như tay thiết kết muốn ta đổi chiều của `newImage` một chút, mặc dù commit ấy đã xưa lắm rồi!!"
+              "Tréo ngoe là bạn lại phải điều chỉnh một chút ở commit trước. Giả sử như tay thiết kế muốn ta đổi chiều của `newImage` một chút, mặc dù commit ấy đã xưa lắm rồi!!"
             ]
           }
         },
@@ -564,7 +605,7 @@ exports.level = {
               "* Cuối cùng, ta sẽ chuyển `main` tới phần đã cập nhật để hoàn thành cấp độ (dùng cách nào tùy bạn)",
               "",
               "Có nhiều cách để hoàn thành mục tiêu (Tôi thấy bạn hấp háy sang cherry-pick rồi đấy), rồi ta sẽ thấy chúng nhiều hơn, nhưng giờ hãy cứ tập trung vào kỹ thuật này đã.",
-              "Sau cùng thì, để ý các dấu nháy đơn(') chứ?-- vì ta đã chuyển commit 2 lần, nên chúng có thêm một dấu nháy đơn. Và một dấu nữa cho commit mà ta đã sửa đổi, thế là ta có trạng thái cuối cùng của cây lịch sử ",
+              "Sau cùng thì, hãy để ý các dấu nháy đơn (') -- Vì ta đã chuyển commit 2 lần, nên chúng có thêm một dấu nháy đơn và một dấu nữa cho commit mà ta đã sửa đổi, thế là ta có trạng thái cuối cùng của cây lịch sử ",
               "",
               "Nói cách khác, khi tôi so sánh kết quả, tôi chỉ so sánh cấu trúc của cây lịch sử. Sự khác biệt về số lượng `'`  không được bao gồm trong so sánh. Miễn là cấu trúc nhánh `main` của bạn giống với cấu trúc đích, tôi sẽ vẫn để bạn qua bài."
             ]
@@ -641,23 +682,23 @@ exports.level = {
       ]
     },
     "it_IT": {
-      childViews: [
+      "childViews": [
         {
-          type: "ModalAlert",
-          options: {
-            markdowns: [
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
               "## Giocoliere di commit",
               "",
               "Ecco una situazione che capita spesso. Hai dei cambiamenti (`newImage`) e un altro insieme di modifiche (`caption`) che sono collegate tra loro, quindi sono posizionate una dopo l'altra nel repository.",
               "",
-              "La cosa complicata è che a volte hai bisogno di fare una piccola modifica a un commit precedente. In questo caso, dobbiamo apporre una modifica a `newImage`, anche se questo commit non risulta essere l'ultimo!!",
-            ],
-          },
+              "La cosa complicata è che a volte hai bisogno di fare una piccola modifica a un commit precedente. In questo caso, dobbiamo apporre una modifica a `newImage`, anche se questo commit non risulta essere l'ultimo!!"
+            ]
+          }
         },
         {
-          type: "ModalAlert",
-          options: {
-            markdowns: [
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
               "Supereremo queste difficoltà facendo i seguenti passaggi:",
               "",
               "* Riordineremo i commit in modo che quello che vogliamo modificare risulti l'ultimo con `git rebase -i`",
@@ -668,11 +709,79 @@ exports.level = {
               "Ci sono vari modi per raggiungere l'obiettivo finale (vedo che strizzi l'occhio verso cherry-pick), e ne vedremo altri più tardi, ma per ora concentriamoci su questa tecnica.",
               "In fine, presta attenzione all'obiettivo -- visto che spostiamo i commit due volte, a entrambi viene messo un apostrofo. Un ulteriore apostrofo è aggiunto per il commit --amend, che completa in fine l'albero.",
               "",
-              "Detto questo, posso confrontare i livelli in base alla struttura e i relativi apostrofi. Finchè il tuo ramo `main` avrà la stessa struttura con i giusti apostrofi, ti darò pieni voti.",
-            ],
-          },
-        },
-      ],
+              "Detto questo, posso confrontare i livelli in base alla struttura e i relativi apostrofi. Finchè il tuo ramo `main` avrà la stessa struttura con i giusti apostrofi, ti darò pieni voti."
+            ]
+          }
+        }
+      ]
     },
+    "ta_IN": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Commit களை மடலாடுவது",
+              "",
+              "இது மிகவும் பொதுவாக நடந்துகொள்கிற ஒரு நிலை. உங்கள் செருக்குகள் (`newImage`) மற்றும் மற்றொரு செருக்கு தொகுதி (`caption`) தொடர்புடையவை, ஆகையால் அவை உங்கள் ரெப்போஸிடரியில் ஒரே காலாண்டில் (அதாவது ஒன்றுக்குப் பிறகு ஒன்று) இருப்பதால் மேலே சீராக stacked ஆக இருக்கின்றன.",
+              "",
+              "கஷ்டமான விஷயம் என்னவென்றால், சில சமயங்களில் நீங்கள் ஒரு பத்தினை சின்ன மாற்றம் செய்ய வேண்டியுள்ளது. இந்த நிலைமையில், வடிவமைப்பு அணியால் `newImage` இன் பரிமாணங்களை சிறிது மாற்ற வேண்டும் என்று கூறப்பட்டுள்ளது, ஆனால் அந்த commit எங்கள் வரலாற்றில் முன்பே இருக்கிறது!!"
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "இந்த சிரமத்தை நாம் பின்வரும் முறையில் களமிறக்குவோம்:",
+              "",
+              "* நாம் commit களை மறுசீரமைத்து மாற்ற வேண்டிய commit உடன் மேலே கொண்டு வருவோம் `git rebase -i`",
+              "* நாம் அந்த சிறிய மாற்றத்தைச் செய்ய `git commit --amend` பயன்படுத்துவோம்",
+              "* பின்னர் நாம் commit களை முதலில் இருந்தபடி மறுசீரமைக்க `git rebase -i` பயன்படுத்துவோம்",
+              "* இறுதியாக, நாம் `main` ஐ இந்த புதுப்பிக்கப்பட்ட பாகத்திற்கு நகர்த்துவோம் (உங்கள் தேர்ந்த முறையைப் பயன்படுத்தி)",
+              "",
+              "இந்த நிலைமையை அடைவதற்கான பல வழிகள் உள்ளன (நான் உங்களை cherry-pick ஐ பார்க்கின்றேன்), மேலும் நாம் அவற்றை பின் பார்க்கப்போகிறோம், ஆனால் தற்போது நாம் இந்த நுணுக்கத்தில் கவனம் செலுத்துவோம்.",
+              "இறுதியாக, இதன் நோக்கம் இந்த நிலையில் கவனிக்கப்பட வேண்டும் -- நாம் commit களை இரண்டு முறை நகர்த்துவதை காரணமாக அவை இரண்டு ஆகவே ஒரு அப்போஸ்ட்ராபி சேர்க்கப்படுகின்றன. நாம் மாற்றிய commit க்கு மேலும் ஒரு அப்போஸ்ட்ராபி சேர்க்கப்படுகிறது, இதனால் முடிவில் மரப்போக்கின் இறுதி வடிவத்தை பெறுகிறோம்.",
+              "",
+              "இதனுடன், நான் இப்போது நிலைகளைக் ஒப்பிட முடியும் கட்டமைப்பு மற்றும் சாத்தியமான அப்போஸ்ட்ராபி வேறுபாடுகளின் அடிப்படையில். உங்கள் மரத்தில் `main` கிளை ஒரே கட்டமைப்பையும் மற்றும் சம்பந்தப்பட்ட அப்போஸ்ட்ராபி வேறுபாடுகளையும் கொண்டிருப்பதாக இருந்தால், நான் முழு கிரெடிட் அளிக்கிறேன்."
+            ]
+          }
+        }
+      ]
+    },
+    "tr_TR": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Commit Hokkabazlığı",
+              "",
+              "Şimdiki senaryomuz aslında sık karşılaşılan başka bir durumdur. İlgili olan iki değişiklik kümeniz (`newImage` ve `caption`) vardır, bu nedenle bu iki küme reponuzda  üst üste yığılıdır (veya diğer adıyla birbiri ardına gelmişlerdir).",
+              "",
+              "Zor olan şey, bazen önceki bir commit üzerinde küçük bir değişiklik yapmanız gerektiğidir. Bu durumda, tasarım ekibi `newImage` 'in boyutlarını biraz değiştirmemizi istiyor, ancak bu commit geçmişimizde çok eski bir tarihte yer alıyor!!"
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Bu zorluğun üstesinden şu şekilde gelebiliriz:",
+              "",
+              "* `git rebase -i` komutu ile değiştirmek istediğimiz commit'i en üste getireceğiz.",
+              "* Küçük değişikliği yapmak için `git commit --amend` komutunu kullanacağız.",
+              "* Ardından, `git rebase -i` komutu ile komitleri önceki sıralarına geri döndüreceğiz.",
+              "* Son olarak, main branch'ini ağacın bu güncellenmiş kısmına taşıyarak seviyeyi bitireceğiz (tabi sizin seçtiğiniz yöntemle).",
+              "",
+              "Bunu başarmak için birçok yol vardır (cherry-pick komutuna göz diktiğinizi görüyorum) ve ileride daha fazlasını göreceğiz, ancak şimdilik bu tekniğe odaklanalım.",
+              "Son olarak, buradaki hedef duruma dikkat edin - commit'leri iki kez taşıdığımızdan, her ikisi de bir tırnak işareti alıyor. Değiştirdiğimiz commit için bir tırnak işareti daha eklenir, bu da bize ağacın son halini verir. ",
+              "",
+              "Şunu da belirtmek isteriz ki, artık seviyeleri yapı ve göreceli tırnak işareti farklılıklarına göre karşılaştırabiliyoruz. Ağacınızın `main` branch'i aynı yapıya ve göreceli tırnak işareti farklılıklarına sahip olduğu sürece tam puan alacaksınız."
+            ]
+          }
+        }
+      ]
+    }
   }
 };

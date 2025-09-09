@@ -1,5 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
-   "http://www.w3.org/TR/html4/strict.dtd">
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -130,6 +129,7 @@
         <a href="javascript:void(0)" class="levelIcon box center centerAlign vertical" id="levelIcon-<%=ids[i]%>" data-id="<%=ids[i]%>">
           <div class="index box" data-id="<%=ids[i]%>">
             <i class="icon-ok-circle" data-id="<%=ids[i]%>"></i>
+            <i class="icon-star" data-id="<%=ids[i]%>"></i>
             <div class="indexNum" data-id="<%=ids[i]%>">
               <%= i + 1 %>
             </div>
@@ -154,6 +154,9 @@
           implementation detail for the UI and confusing
         -->
           <%= command.replace(' --aboveAll', '') %>
+        </p>
+        <p class="transitionOpacity" target="reset">
+            Reset Animation
         </p>
       </div>
 
@@ -326,9 +329,13 @@
   </script>
 
   <script type="text/html" id="confirm-cancel-template">
-    <button class="noStyle box cancelButton uiButton uiButtonRed">
-      <%= cancel %>
-    </button>
+    <% if (disableCancelButton) { %>
+      <span></span>
+    <% } else { %>
+      <button class="noStyle box cancelButton uiButton uiButtonRed">
+        <%= cancel %>
+      </button>
+    <% } %>
     <button class="noStyle box confirmButton uiButton uiButtonYellow">
       <%= confirm %>
     </button>
@@ -343,10 +350,10 @@
         </span>
         <button id="toggleButton" class="noStyle uiButton uiButtonPink">
           <span class="showWhenPicked">
-            Omit
+            Click to Drop/Omit
           </span>
           <span class="showWhenNotPicked">
-            Pick
+            Click to Include/Pick
           </span>
         </button>
       </div>
@@ -460,18 +467,14 @@
 </style>
 
 
-  <!-- The advantage of github pages: super-easy, simple, slick static hostic.
-       The downside? No raw logs to parse for analytics, so I have to include
-       Google analytics :-/ -->
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-37500646-1']);
-    _gaq.push(['_trackPageview']);
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SF8FGS1DYX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-SF8FGS1DYX');
   </script>
 </body>
 </html>

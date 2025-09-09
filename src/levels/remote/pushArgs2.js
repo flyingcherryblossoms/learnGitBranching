@@ -13,13 +13,15 @@ exports.level = {
     "de_DE": "Optionen für Git Push -- noch mehr!",
     "ja": "Git pushの引数 -- 拡張編!",
     "fr_FR": "Arguments de git push -- toujours plus !",
+    "ro": "Argumente git push -- Continuarea!",
     "ru_RU": "Аргументы для push -- расширенная версия!",
     "ko": "git push 인자 -- 확장판!",
     "uk": "Розширені аргументи git push!",
     "vi": "Tham số git push -- bản mở rộng!",
     "sl_SI": "Git push argumenti -- Razširjeni!",
     "pl": "Argumenty git push -- Głębiej!",
-    "it_IT": "Parametri di git push - Espansione!"
+    "it_IT": "Parametri di git push - Espansione!",
+    "tr_TR": "Git push argümanları -- Genişletilmiş!"
   },
   "hint": {
     "en_US": "Remember you can admit defeat and type in \"show solution\" :P",
@@ -32,13 +34,15 @@ exports.level = {
     "de_DE": "Vergiss nicht dass du aufgeben kannst, indem du \"show solution\" eingibst :P",
     "ja": "降参して解説を見るには\"show solution\"を実行できるのをお忘れなく",
     "fr_FR": "N'oubliez pas que vous pouvez toujours déclarer forfait avec \"show solution\" :P",
+    "ro": "Nu uita că îți poți admite înfrângerea și tasta \"show solution\" pentru a vedea soluția :P",
     "ru_RU": "Помните, Вы всегда можете признать своё поражение, набрав команду \"show solution\" (показать решение) :P",
     "ko": "혹시 아세요? 패배를 인정하고 \"show solution\"을 입력할 수 있다는 걸요 :P",
     "uk": "Пам'ятай, ти завжди можеш визнати поразку і підглянути рішення командою \"show solution\" :P",
     "vi": "Nhớ rằng, bạn có thể thừa nhận thất bại và gõ \"show solution\" :P",
     "sl_SI": "Vedno se lahko predaš in napišeš \"show solution\". :P",
     "pl": "Pamiętaj, że możesz się poddać i zobaczyć gotowe rozwiązanie, wpisując \"show solution\" :P",
-    "it_IT": "Puoi sempre ammettere la tua sconfitta e digitare \"show solution\" :P"
+    "it_IT": "Puoi sempre ammettere la tua sconfitta e digitare \"show solution\" :P",
+    "tr_TR": "Unutma, teslim olabileceğini ve \"show solution\" yazabileceğini :P"
   },
   "startDialog": {
     "en_US": {
@@ -751,6 +755,76 @@ exports.level = {
         }
       ]
     },
+    "ro": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Detalii a argumentului `<locatie>`",
+              "",
+              "Îți amintești din lecția anterioară că atunci când am specificat `main` ca argument pentru git push, am specificat atât *sursa* de unde vor veni commit-urile cât și *destinația* unde vor merge.",
+              "",
+              "Te-ai putea întreba -- dar ce se întâmplă dacă vrem ca sursa și destinația să fie diferite? Ce se întâmplă dacă vrei să împingi commit-uri din ramura locală `foo` în ramura `bar` de pe remote?",
+              "",
+              "Ei bine, din păcate asta este imposibil în git... glumesc! Sigur că este posibil :)... git are o flexibilitate extrem de mare (poate chiar prea mare).",
+              "",
+              "Vom vedea cum în următorul slide..."
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Pentru a specifica atât sursa cât și destinația pentru `<locatie>`, pur și simplu le unești folosind două puncte:",
+              "",
+              "`git push origin <sursa>:<destinatie>`",
+              "",
+              "Acest lucru este adesea denumit refspec cu două puncte. Refspec este doar un nume fain pentru o locație pe care git o poate înțelege (cum ar fi ramura `foo` sau chiar `HEAD~1`)",
+              "",
+              "Odată ce specifici atât sursa cât și destinația în mod independent, poți deveni foarte elegant și precis cu comenzile pentru remote. Hai să vedem o demonstrație!"
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Amintește-ți, `sursa` este orice locație pe care git o poate înțelege:"
+            ],
+            "afterMarkdowns": [
+              "Wow! Aceasta este o comandă destul de ciudată, dar are sens -- git a rezolvat `foo^` într-o locație, a încărcat toate commit-urile care nu erau deja prezente pe remote și apoi a actualizat destinația."
+            ],
+            "command": "git push origin foo^:main",
+            "beforeCommand": "git clone; go -b foo; git commit; git commit"
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Ce se întâmplă dacă destinația în care vrei să faci push nu există? Nicio problemă! Doar dă un nume de ramură și git va crea ramura pe remote pentru tine."
+            ],
+            "afterMarkdowns": [
+              "Super, asta e foarte fain :D"
+            ],
+            "command": "git push origin main:newBranch",
+            "beforeCommand": "git clone; git commit"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Pentru acest nivel, încearcă să ajungi la starea finală a obiectivului afișată în vizualizare și amintește-ți formatul:",
+              "",
+              "`<sursa>:<destinatie>`"
+            ]
+          }
+        }
+      ]
+    },
     "ru_RU": {
       "childViews": [
         {
@@ -847,7 +921,7 @@ exports.level = {
               "",
               "`git push origin <source>:<destination>`",
               "",
-              "이것을 일반적으로 colon refspec(콜론 참조스펙)이라고 부릅니다. 참조스펙은 그냥 \"git이 알아낼 수 있는 위치\"를 이름 붙여서 말하는거에요 (브랜치 'foo'라던가 HEAD~1 라던가)",
+              "이것을 일반적으로 colon refspec(콜론 참조스펙)이라고 부릅니다. 참조스펙은 그냥 \"git이 알아낼 수 있는 위치\"를 이름 붙여서 말하는거에요 (브랜치 'foo'라든가 HEAD~1 라든가)",
               "",
               "source와 destination을 따로 지정할 수 있게 되면서, 이제 원격관련 명령어를 좀 멋지고 정확히 사용할수 있게 되었어요. 데모를 봅시다!"
             ]
@@ -973,9 +1047,9 @@ exports.level = {
               "",
               "Có thể bạn sẽ thắng mắc -- Nếu như ta muốn nguồn và đích khác đi thì sao? Nếu như ta muốn đẩy commit từ nhánh cục bộ `foo` lên nhánh từ xa `bar` thì sao?",
               "",
-              "Chà đáng tiếc là điều này là bất khả thi tron git... đùa thôi! Tất nhiên là làm được chứ :)... git có nhiều và rất nhiều lựa chọn linh động(có lẽ là quá nhiều)",
+              "Chà đáng tiếc là điều này là bất khả thi tron Git... đùa thôi! Tất nhiên là làm được chứ :)... Git có nhiều và rất nhiều lựa chọn linh động (có lẽ là quá nhiều)",
               "",
-              "Hãy xem cách nó hoạt động ..."
+              "Hãy xem cách nó hoạt động..."
             ]
           }
         },
@@ -987,7 +1061,7 @@ exports.level = {
               "",
               "`git push origin <nguồn>:<đích>`",
               "",
-              "Giá trị thực của tham số này là một refspec, \"refspec\" là một từ tự tạo, nghĩa là một vị trí được Git nhận ra (chẳng hạn như nhánh `foo` hoặc` HEAD ~ 1`).",
+              "Giá trị thực của tham số này là một refspec, \"refspec\" là một từ tự tạo, nghĩa là một vị trí Git có thể nhận ra (chẳng hạn như nhánh `foo` hoặc `HEAD ~ 1`).",
               "",
               "Một khi bạn đã chỉ định các nguồn và đích độc lập, bạn có thể thao tác với kho chứa từ xa một cách khá thú vị và chính xác, hãy xem bản demo!"
             ]
@@ -997,10 +1071,10 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "Nhớ rằng, `nguồn` là bất kỳ vị trí nào mà git hiểu:"
+              "Nhớ rằng, `nguồn` là bất kỳ vị trí nào mà Git hiểu:"
             ],
             "afterMarkdowns": [
-              "Wao! Lệnh này khá phức tạp, nhưng mà hợp lý -- git diễn giải `foo^` thành một vị trí, tải lên tất cả các commit từ đó trở về trước mà chưa có trên nhánh đích rồi cập nhật nó."
+              "Wao! Lệnh này khá phức tạp, nhưng mà hợp lý -- Git diễn giải `foo^` thành một vị trí, tải lên tất cả các commit từ đó trở về trước mà chưa có trên nhánh đích rồi cập nhật nó."
             ],
             "command": "git push origin foo^:main",
             "beforeCommand": "git clone; go -b foo; git commit; git commit"
@@ -1010,10 +1084,10 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "Nếu như đích đến mà bạn muốn không tồn tại thì sao? Chẳng sao cả! Đơn giản hãy gõ tên nhánh và git sẽ tạo nhánh đó trên kho chứa từ xa cho bạn."
+              "Nếu như đích đến mà bạn muốn không tồn tại thì sao? Chẳng sao cả! Đơn giản hãy gõ tên nhánh và Git sẽ tạo nhánh đó trên kho chứa từ xa cho bạn."
             ],
             "afterMarkdowns": [
-              "Tuyệt vời, thấy git thú vị không :D"
+              "Tuyệt vời, thấy Git thú vị không :D"
             ],
             "command": "git push origin main:newBranch",
             "beforeCommand": "git clone; git commit"
@@ -1241,5 +1315,75 @@ exports.level = {
         }
       ]
     },
+    "tr_TR": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## `<place>` argümanı detayları",
+              "",
+              "Önceki dersten hatırlayacağınız gibi, `git push` komutunda `main`'i yer argümanı olarak belirttiğimizde, commitlerin nereden geleceğini (kaynak) ve nereye gideceğini (hedef) belirlemiştik.",
+              "",
+              "O zaman şöyle bir soru aklınıza gelebilir: Eğer kaynak ve hedef farklı olursa ne olur? Örneğin, yerel `foo` dalındaki commitleri uzaktaki `bar` dalına itmek isterseniz?",
+              "",
+              "Ne yazık ki, git'te bu imkansız... Şaka yapıyorum! Tabii ki mümkün :)... Git, oldukça fazla esneklik sunar (belki de fazla).",
+              "",
+              "Bir sonraki slaytta nasıl yapılacağını görelim..."
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Hem kaynak hem de hedefi belirtmek için, her ikisini iki nokta ile birleştirmeniz yeterlidir:",
+              "",
+              "`git push origin <source>:<destination>`",
+              "",
+              "Bu, genellikle iki noktalı refspec olarak adlandırılır. Refspec, git'in anlayabileceği bir konum için kullanılan havalı bir terimdir (örneğin `foo` dalı ya da sadece `HEAD~1`).",
+              "",
+              "Her iki argümanı bağımsız olarak belirttiğinizde, uzaktaki komutlarla oldukça detaylı ve hassas işlemler yapabilirsiniz. Hadi bir demo görelim!"
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Hatırlayın, `source` git'in anlayacağı herhangi bir konum olabilir:"
+            ],
+            "afterMarkdowns": [
+              "Vay canına! Oldukça karmaşık bir komut ama mantıklı -- git, `foo^`'u bir konuma çözümlüyor, uzak sunucuda henüz bulunmayan commitleri yüklüyor ve sonra hedefi güncelliyor."
+            ],
+            "command": "git push origin foo^:main",
+            "beforeCommand": "git clone; go -b foo; git commit; git commit"
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Peki ya hedef dalı yoksa ne olur? Sorun değil! Sadece bir dal adı verin, git sizin için bu dalı uzak sunucuda oluşturacaktır."
+            ],
+            "afterMarkdowns": [
+              "Vay, bu oldukça havalı :D"
+            ],
+            "command": "git push origin main:newBranch",
+            "beforeCommand": "git clone; git commit"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Bu seviyede, görsellemede gösterilen hedef duruma ulaşmaya çalışın ve şu formatı hatırlayın:",
+              "",
+              "`<source>:<destination>`"
+            ]
+          }
+        }
+      ]
+    }
   }
 };

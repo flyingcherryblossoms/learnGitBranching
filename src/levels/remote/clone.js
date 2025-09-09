@@ -1,5 +1,5 @@
 exports.level = {
-  "goalTreeString": '{"branches":{"main":{"target":"C1","id":"main","remoteTrackingBranchID":"o/main"},"o/main":{"target":"C1","id":"o/main","remoteTrackingBranchID":null}},"commits":{"C0":{"parents":[],"id":"C0","rootCommit":true},"C1":{"parents":["C0"],"id":"C1"}},"HEAD":{"target":"main","id":"HEAD"},"originTree":{"branches":{"main":{"target":"C1","id":"main","remoteTrackingBranchID":null}},"commits":{"C0":{"parents":[],"id":"C0","rootCommit":true},"C1":{"parents":["C0"],"id":"C1"}},"HEAD":{"target":"main","id":"HEAD"}}}',
+  "goalTreeString": "{\"branches\":{\"main\":{\"target\":\"C1\",\"id\":\"main\",\"remoteTrackingBranchID\":\"o/main\"},\"o/main\":{\"target\":\"C1\",\"id\":\"o/main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"},\"originTree\":{\"branches\":{\"main\":{\"target\":\"C1\",\"id\":\"main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"}},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}}",
   "solutionCommand": "git clone",
   "name": {
     "en_US": "Clone Intro",
@@ -7,18 +7,21 @@ exports.level = {
     "de_DE": "Clone Einführung",
     "ja": "Clone入門",
     "es_AR": "Introducción a clone",
+    "es_MX": "Introducción a clone",
     "es_ES": "Introducción a clone",
     "pt_BR": "Introdução à clonagem",
     "gl": "Introducción a clone",
     "zh_CN": "Git Clone",
     "zh_TW": "介紹 clone",
+    "ro": "Introducere în clonare",
     "ru_RU": "Введение в клонирование",
     "ko": "Clone 소개",
     "uk": "Знайомство з clone",
     "vi": "Giới thiệu về clone",
     "sl_SI": "Uvod v Git Clone",
     "pl": "Wstęp do klonowania (clone)",
-    "it_IT": "Introduzione al clone"
+    "it_IT": "Introduzione al clone",
+    "tr_TR": "Clone Tanıtımı"
   },
   "hint": {
     "en_US": "Just git clone!",
@@ -27,17 +30,20 @@ exports.level = {
     "ja": "単にgit clone!",
     "zh_CN": "只要 git clone 就可以了!",
     "es_AR": "Simplemente hacé git clone!",
+    "es_MX": "Simplemente haz git clone!",
     "es_ES": "¡Simplemente escribe `git clone`!",
     "pt_BR": "Basta fazer um git clone!",
     "gl": "¡Chega con facer git clone!",
     "zh_TW": "只要 git clone 就好了",
+    "ro": "Doar git clone!",
     "ru_RU": "Простой git clone!",
     "ko": "그냥 git clone 하세요!",
     "uk": "Просто git clone!",
-    "vi": "Đơn giản là `git clone`!",
+    "vi": "Đơn giản là git clone!",
     "sl_SI": "Preprosto samo git clone!",
     "pl": "Po prostu git clone!",
-    "it_IT": "Semplicemente git clone!"
+    "it_IT": "Semplicemente git clone!",
+    "tr_TR": "Sadece git clone yapın!"
   },
   "startDialog": {
     "en_US": {
@@ -206,6 +212,63 @@ exports.level = {
           "options": {
             "markdowns": [
               "Para completar este nivel, simplemente hacé `git clone` de tu repositorio existente. El verdadero aprendizaje viene en las próximas lecciones."
+            ]
+          }
+        }
+      ]
+    },
+    "es_MX": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Git Remotes",
+              "",
+              "Los repositorios remotos no son realmente _tan_ complicados. En el mundo actual de la computación en la nube es facil pensar que hay un montón de magia detrás de los git remotes, pero en realidad sólo son copias de tu repositorio en otra computadora. Típicamente vas a comunicarte con esta otra computadora a través de Internet, lo que te permite transferir commits de un lado a otro.",
+              "",
+              "Habiendo dicho eso, los repositorios remotos tienen un montón de propiedades geniales:",
+              "",
+              "- Primero y principalmente, los remotes ¡funcionan como un respaldo increible! Los repositorios locales de git tienen la habilidad de restaurar archivos a un estado previo (como ya sabes), pero toda esa información se encuentra almacenada localmente. Al tener copias de tu repositorio git en otras computadoras, puedes perder todos tus datos locales y aún así retomar el trabajo en donde lo dejaste.",
+              "",
+              "- Más importante, ¡los remotes hacen más social la programación! Ahora que hay una copia de tu proyecto almacenada en otro lugar, tus amigos pueden contribuir a tu proyecto (u obtener los últimos cambios) de un modo muy sencillo.",
+              "",
+              "Se ha vuelto bastante popular el uso de sitios web que muestran la actividad de los repositorios (como [GitHub](https://github.com/)), pero los repositorios remotos _siempre_ sirven como la base subyacente de esas herramientas. Así que ¡es importante entenderlos!"
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Nuestro comando para crear remotes",
+              "",
+              "Hasta este punto, Learn Git Branching se ha centrado en enseñar las bases del trabajo con repositorios _locales_ (manejo de ramas, mezclar, rebasear, etc). Sin embargo, ahora que queremos aprender sobre el trabajo con repositorios remotos, necesitamos un comando para inicializar nuestro entorno para esas lecciones. Ese comando será `git clone`.",
+              "",
+              "Técnicamente, `git clone` en el mundo real es el comando que usarías para crear copias _locales_ de un repositorio remoto (de GitHub, por ejemplo). Nosotros, en Learn Git Branching, lo usamos de un modo un poco diferente -- `git clone` va a crear un repositorio remoto a partir del tuyo local. Estamos de acuerdo en que técnicamente es lo opuesto al comando real, pero ayuda bastante a entender la conexión entre el clonado y el trabajo en un repositorio remoto, así que vamos a seguir así por ahora.",
+              ""
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Comencemos despacio y simplemente veamos cómo se ve un repositorio remoto en nuestro caso.",
+              ""
+            ],
+            "afterMarkdowns": [
+              "¡Ahí está! Ahora tenemos un repositorio remoto de nuestro proyecto. Se ve bastante similar, excepto por algunos cambios visuales para hacer evidente la distinción -- en niveles posteriores vas a ver cómo compartir trabajo entre estos repositorios."
+            ],
+            "command": "git clone",
+            "beforeCommand": ""
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Para completar este nivel, simplemente ejecuta `git clone` en tu repositorio existente. El verdadero aprendizaje viene en las próximas lecciones."
             ]
           }
         }
@@ -398,7 +461,7 @@ exports.level = {
               "",
               "- 更重要的是, remote 讓大家一起來 coding！現在你的 project 放在 remote 上面，你的朋友可以很容易地對你的 project 做出貢獻（或者是 pull 你最後的修改） 。",
               "",
-              "使用網站去對 remote repository 做視覺化非常流行（例如 [GitHub](https://github.com/） 或者是 [Phabricator]（http://phabricator.org/）），但這背後最大的功臣是 remote repository，因此我們務必要了解它。"
+              "使用網站去對 remote repository 做視覺化非常流行（例如 [GitHub](https://github.com/) 或者是 [Phabricator](http://phabricator.org/)），但這背後最大的功臣是 remote repository，因此我們務必要了解它。"
             ]
           }
         },
@@ -568,7 +631,7 @@ exports.level = {
               "",
               "- それよりも大切なこととして、リモートではコードをより一般的に公開できます！プロジェクトのコピーが別の場所に保存されているため、友達などが簡単にそのプロジェクトに参加したり最近の変更をpullしたりできます。",
               "",
-              "最近ではリモートリポジトリに関するデータをビジュアル的に表示するウェブサイト([GitHub](https://github.com/)や[Phabricator](http://phabricator.org/)など)の使用が人気を集めていますが、リモートリポジトリは_そのいずれの_ウェブサイトの裏にも使われています。なので理解する必要があります。"
+              "最近ではリモートリポジトリに関するデータをビジュアル的に表示するウェブサイト([GitHub](https://github.com/)や[Phabricator](http://phabricator.org/)など)の使用が人気を集めていますが、リモートリポジトリは _そのいずれの_ ウェブサイトの裏にも使われています。なので理解する必要があります。"
             ]
           }
         },
@@ -578,9 +641,9 @@ exports.level = {
             "markdowns": [
               "## リモートを作成するコマンド",
               "",
-              "今までLearn Git Branchingでは_ローカル_リポジトリの様々な作業（branch, merge, rebaseなど）に焦点を当ててきました。しかし、これからはリモートリポジトリの作業を学びますので、レッスンのために環境をセットアップする必要があります。そのコマンドは`git clone`になります。",
+              "今までLearn Git Branchingでは _ローカル_ リポジトリの様々な作業（branch, merge, rebaseなど）に焦点を当ててきました。しかし、これからはリモートリポジトリの作業を学びますので、レッスンのために環境をセットアップする必要があります。そのコマンドは`git clone`になります。",
               "",
-              "通常、`git clone`はリモートリポジトリ（githubなどから）を_ローカル_にコピーする時に使います。しかしLearn Git Branchingでは少し違ったように使います -- ここでは`git clone`が_ローカルリポジトリ_をリモートにコピーします。本当のコマンドの逆の動作になっているのですが、学んでいくうちにcloneとリモートリポジトリのつながりが見えてくるはずです。なので、今はとりあえず例として使ってみましょう。",
+              "通常、`git clone`はリモートリポジトリ（githubなどから）を _ローカル_ にコピーする時に使います。しかしLearn Git Branchingでは少し違ったように使います -- ここでは`git clone`が _ローカルリポジトリ_ をリモートにコピーします。本当のコマンドの逆の動作になっているのですが、学んでいくうちにcloneとリモートリポジトリのつながりが見えてくるはずです。なので、今はとりあえず例として使ってみましょう。",
               ""
             ]
           }
@@ -604,6 +667,63 @@ exports.level = {
           "options": {
             "markdowns": [
               "このレベルをクリアするには、`git clone`で既存のリポジトリのクローンを作成します。次のレッスンでより詳細に見ていきます。"
+            ]
+          }
+        }
+      ]
+    },
+    "ro": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Git Remotes",
+              "",
+              "Repozitoriile remote nu sunt chiar atât de complicate. In lumea de astazi a cloud-ului, e ușor să crezi ca exista multă magie in spatele remote-urilor git, dar ele sunt de fapt doar copii ale repozitoriului tău pe un alt calculator. De obicei poți comunica cu acest alt calculator prin intermediul internetului, ceea ce iți permite să transferi commit-uri in ambele sensuri.",
+              "",
+              "Asta fiind spus, repo-urile remote au o serie de proprietăți interesante:",
+              "",
+              "- In primul rand, remote-urile sunt un backup excelent! Repositoriile git locale au capacitatea de a restaura fișiere la o stare anterioară (așa cum știi), dar toate informațiile sunt stocate local. Având copii ale repositoriului tău git pe alte calculatoare, poți pierde toate datele locale și totuși să continui de unde ai rămas.",
+              "",
+              "- Mai important, remote-urile fac ca programarea să fie socială! Acum că o copie a proiectului tău este găzduită în altă parte, prietenii tăi pot contribui cu ușurință la proiectul tău (sau pot obține ultimele tale modificări).",
+              "",
+              "A devenit foarte popular să folosești site-uri care vizualizează activitatea din jurul repo-urilor remote (cum ar fi [GitHub](https://github.com/)), dar repo-urile remote _întotdeauna_ servesc ca baza pentru aceste instrumente. Așa că este important să le înțelegi!"
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Comanda noastră pentru a crea remote-uri",
+              "",
+              "Până acum, Learn Git Branching s-a concentrat pe învățarea elementelor de bază ale lucrului cu repo-uri _locale_ (branching, merging, rebasing etc). Cu toate acestea, acum că vrem să învățăm despre lucrul cu repo-uri remote, avem nevoie de o comandă pentru a configura mediul pentru aceste lecții. Această comandă va fi `git clone`.",
+              "",
+              "Tehnic vorbind, `git clone` în lumea reală este comanda pe care o folosești pentru a crea copii _locale_ ale repo-urilor remote (de pe GitHub, de exemplu). Folosim această comandă puțin diferit în `Learn Git Branching` -- aici `git clone` va crea un repo remote din cel local. Sigur că este opusul tehnic al comenzii reale, dar ajută la construirea conexiunii între clonare și lucrul cu repo-uri remote, așa că hai să mergem în modul acesta în continuare.",
+              ""
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Să începem încet și să vedem cum arată un repo remote în vizualizarea noastră.",
+              ""
+            ],
+            "afterMarkdowns": [
+              "Iată-l! Acum avem un repo remote al proiectului nostru. Arată foarte asemănător, cu câteva diferențe vizuale pentru a face distincția clară -- în nivelurile următoare vei vedea cum împărtășim munca între aceste repo-uri."
+            ],
+            "command": "git clone",
+            "beforeCommand": ""
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Pentru a finaliza acest nivel, pur și simplu execută `git clone` pe repo-ul tău existent. Învățarea adevărată va veni în lecțiile următoare."
             ]
           }
         }
@@ -694,7 +814,7 @@ exports.level = {
               "",
               "지금까지, Git 브랜치 배우기는 _로컬_ 저장소가 어떻게 활용되는지에 대해 중점적으로 소개해 왔습니다(브랜치, 합병, 리베이스 등등). 이제 원격 저장소를 어떻게 활용하는지에 대해 배워보려고 합니다. 앞으로 이어질 레슨의 환경을 마련할 명령어가 필요합니다. `git clone`이 바로 그 명령어입니다.",
               "",
-              "실제로 `git clone`은 원격 저장소의 복사본을 _로컬_에 생성할때 사용하는 명령어입니다(github에서 가져올 때라던가). Git 브랜치 배우기에서는 이 명령어를 살짝 다르게 사용합니다 -- `git clone`이 당신의 로컬 저장소에서 원격 저장소를 생성해냅니다. 물론 실제 명령어와 반대로 작동하는 것이지만 클론과 원격 저장소 사이의 연결관계를 이해하는데 도움이되서 이렇게 했습니다. 일단은 그냥 해봅시다.",
+              "실제로 `git clone`은 원격 저장소의 복사본을 _로컬_에 생성할때 사용하는 명령어입니다(github에서 가져올 때라든가). Git 브랜치 배우기에서는 이 명령어를 살짝 다르게 사용합니다 -- `git clone`이 당신의 로컬 저장소에서 원격 저장소를 생성해냅니다. 물론 실제 명령어와 반대로 작동하는 것이지만 클론과 원격 저장소 사이의 연결관계를 이해하는데 도움이되서 이렇게 했습니다. 일단은 그냥 해봅시다.",
               ""
             ]
           }
@@ -786,17 +906,17 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "## Git Remotes(Kho lưu trữ từ xa)",
+              "## Git Remotes (Kho lưu trữ từ xa)",
               "",
-              "Thực ra thì kho remote cũng không khó hiểu lắm đâu. Giờ đây đâu đâu cũng thấy điện toán đám mây nên ai ai cũng tưởng git remote nó là cái gì đó ma thuật lắm, nhưng chúng thực ra chỉ là những bản sao chép ko chứa của bạn lên máy tính khác. Bạn có thể giao tiếp với chúng qua internet, tù đó mà chuyển giao commit qua lại.",
+              "Thực ra thì kho chứa từ xa cũng không khó hiểu lắm đâu. Giờ đây, đâu đâu cũng thấy điện toán đám mây nên ai ai cũng tưởng git remote nó là cái gì đó ma thuật lắm, nhưng chúng thực ra chỉ là những bản sao chép kho chứa của bạn lên máy tính khác. Bạn có thể giao tiếp với chúng qua internet, từ đó mà chuyển giao commit qua lại.",
               "",
-              "Vì lẽ đó mà kho remote có những đặc tính tuyệt vời:",
+              "Vì lẽ đó mà kho chứa từ xa có những đặc tính tuyệt vời:",
               "",
-              "- Trước hết, có tác dụng như là bản sao dự phòng! Bạn đã biết rằng kho địa phương có thể khôi phục trở lại trạng thái trước đó, nhưng tất cả thông tin đó chỉ được lưu trữ cục bộ. Bằng cách sao chép toàn bộ kho chứa của bạn lên máy tính ở xa, bạn hoàn toàn có thể mất hết dữ liệu tại máy tính mà vẫn tiếp tục làm việc như chưa có gì xảy ra.",
+              "- Trước hết, có tác dụng như là bản sao dự phòng! Bạn đã biết rằng kho cục bộ có thể khôi phục trở lại trạng thái trước đó, nhưng tất cả thông tin đó chỉ được lưu trữ cục bộ. Bằng cách sao chép toàn bộ kho chứa của bạn lên máy tính ở xa, một khi dữ liệu trong máy tính bị mất, bạn vẫn có thể tiếp tục làm việc như chưa có gì xảy ra.",
               "",
-              "- Quạn trọng hơn nữa, kho remote khiến lập trình có tính cộng đồng hơn! Bây giờ bản sao dự án của bạn đã được lưu trũ ở nơi khác, bạn bè của bạn có thể đóng góp (hoặc kéo về cập nhật mới nhất) dự án của bạn rất dễ dàng.",
+              "- Quan trọng hơn nữa, kho chứa từ xa khiến lập trình có tính cộng đồng hơn! Bây giờ bản sao dự án của bạn đã được lưu trữ ở nơi khác, bạn bè của bạn có thể đóng góp (hoặc kéo về cập nhật mới nhất) dự án của bạn rất dễ dàng.",
               "",
-              "Trực quan hóa các kho lưu trữ từ xa bằng cách sử dụng các trang web đang trở nên phổ biến hơn (như [GitHub] (https://github.com/) hoặc [Photypeator] (http://phovenator.org/)), nhưng các kho lưu trữ từ xa * * Luôn luôn ** là trụ cột của các công cụ này, vì vậy điều quan trọng là phải hiểu khái niệm này!"
+              "Trực quan hóa các kho lưu trữ từ xa bằng cách sử dụng các trang web đang trở nên phổ biến hơn (như [GitHub](https://github.com/)), nhưng các kho lưu trữ từ xa _luôn luôn_ là trụ cột của các công cụ này, vì vậy điều quan trọng là phải hiểu khái niệm này!"
             ]
           }
         },
@@ -806,9 +926,9 @@ exports.level = {
             "markdowns": [
               "## Câu lệnh của chúng tôi để tạo kho lưu trữ từ xa",
               "",
-              "Cho đến bây giờ, Learn Git Branching đã tập trung dạy về làm việc trên kho chứa _địa phương_ (rẽ nhánh `branch`, hợp nhánh `merge`, dịch chuyển nhánh `rebase`, vân vân ...). Nhưng bây giờ ta lại muốn học về làm việc trên kho lưu trữ từ xa, ta cần một câu lệnh để cài đặt môi trường cho những bài học này. Đó là `git clone`",
+              "Cho đến bây giờ, Học Nhánh Git đã tập trung dạy về làm việc trên kho chứa _cục bộ_ (rẽ nhánh `branch`, hợp nhánh `merge`, dịch chuyển nhánh `rebase`,...). Nhưng bây giờ ta lại muốn học về làm việc trên kho lưu trữ từ xa, ta cần một câu lệnh để cài đặt môi trường cho những bài học này. Đó là `git clone`.",
               "",
-              "Về mặt kỹ thuật, thì `git clone` thực tế là câu lệnh dùng để tạo một bản sao chép _địa phương_ của khó chứa từ xa (ví dụ từ github chẳng hạn). Nhưng trong Learn Git Branching ta sẽ dùng câu lệnh này hơi khác biệt một chút -- `git clone` sẽ tạo ra một bản sao chép lên kho lưu trữu từ xa dựa trên kho chứa cục bộ của bạn. Điều này hoàn toàn ngược lại với câu lệnh thực tế, nhưng nó giúp ta nhân bản và làm việc với kho lưu trữ từ xa, nên ta sẽ dùng nó trong quá trình học.",
+              "Về mặt kỹ thuật, thì `git clone` thực tế là câu lệnh dùng để tạo một bản sao chép _cục bộ_ của kho chứa từ xa (ví dụ từ GitHub chẳng hạn). Nhưng trong Học Nhánh Git ta sẽ dùng câu lệnh này hơi khác biệt một chút -- `git clone` sẽ tạo ra một bản sao chép lên kho lưu trữ từ xa dựa trên kho chứa cục bộ của bạn. Điều này hoàn toàn ngược lại với câu lệnh thực tế, nhưng nó giúp ta nhân bản và làm việc với kho lưu trữ từ xa, nên ta sẽ dùng nó trong quá trình học.",
               ""
             ]
           }
@@ -821,7 +941,7 @@ exports.level = {
               ""
             ],
             "afterMarkdowns": [
-              "Nó đây rồi! Giờ ta đã có kho lưu trữ dự án chúng ta từ xa. Nhìn nó cũng khá tương tự chỉ là được minh họa khác biệt một chút -- đến các cấp độ sau ta sẽ tìm hiểu thêm về cách thức trao đổi nội dung giữa các kho chứa này."
+              "Nó đây rồi! Giờ ta đã có kho lưu trữ dự án từ xa. Nhìn nó cũng khá tương tự chỉ là được minh họa khác biệt một chút -- đến các cấp độ sau ta sẽ tìm hiểu thêm về cách thức trao đổi nội dung giữa các kho chứa này."
             ],
             "command": "git clone",
             "beforeCommand": ""
@@ -992,7 +1112,7 @@ exports.level = {
               ""
             ],
             "afterMarkdowns": [
-              "Eccolo! Ora abbiamo un repository remoto del nostro progetto. Appare molto similie eccetto per qualche modifica nella visualizzazione per far notare la distinzione -- nei successivi livelli vedrai come condividere il lavoro tra questi repository."
+              "Eccolo! Ora abbiamo un repository remoto del nostro progetto. Appare molto simile eccetto per qualche modifica nella visualizzazione per far notare la distinzione -- nei successivi livelli vedrai come condividere il lavoro tra questi repository."
             ],
             "command": "git clone",
             "beforeCommand": ""
@@ -1003,6 +1123,63 @@ exports.level = {
           "options": {
             "markdowns": [
               "Per completare questo livello, semplicemente esegui `git clone` nel tuo repository esistente. Il succo dell'apprendimento avverrà nelle prossime lezioni."
+            ]
+          }
+        }
+      ]
+    },
+    "tr_TR": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Git Uzak Depoları",
+              "",
+              "Uzak depolar aslında o kadar karmaşık değildir. Günümüz bulut bilişim dünyasında, uzak depoların arkasında bir sürü sihir olduğunu düşünmek kolay olabilir, ancak aslında bunlar sadece başka bir bilgisayardaki depo kopyalarınızdır. Genellikle bu başka bilgisayarlarla internet üzerinden iletişim kurabilirsiniz, bu da size değişiklikleri karşılıklı olarak aktarmayı sağlar.",
+              "",
+              "Bununla birlikte, uzak depoların bir dizi harika özelliği vardır:",
+              "",
+              "- İlk ve en önemli olarak, uzak depolar mükemmel bir yedekleme işlevi görür! Yerel git depoları, dosyaları önceki bir duruma geri yükleyebilme yeteneğine sahiptir (bildiğiniz gibi), ancak tüm bu bilgiler yerel olarak depolanır. Git deponuzun kopyalarını diğer bilgisayarlarda bulundurmak, tüm yerel verilerinizi kaybetseniz bile kaldığınız yerden devam etmenizi sağlar.",
+              "",
+              "- Daha da önemlisi, uzak depolar kodlamayı sosyal hale getirir! Projenizin bir kopyası başka bir yerde barındırıldığında, arkadaşlarınız çok kolay bir şekilde projenize katkıda bulunabilir (ya da son değişikliklerinizi çekebilir).",
+              "",
+              "Uzak depolar etrafındaki etkinlikleri görselleştiren web siteleri kullanmak çok popüler hale geldi (örneğin [GitHub](https://github.com/)), ancak uzak depolar _her zaman_ bu araçların temel altyapısını oluşturur. Bu yüzden onları anlamak önemlidir!"
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Uzak Depoları Oluşturmak için Komutumuz",
+              "",
+              "Şu ana kadar, Learn Git Branching yerel depo çalışmalarının (dallama, birleştirme, yeniden tabanlama, vb.) temellerini öğretmeye odaklanmıştı. Ancak şimdi uzak depo çalışmalarını öğrenmek istediğimiz için, bu dersler için ortamı kuracak bir komuta ihtiyacımız var. `git clone` bu komut olacak.",
+              "",
+              "Teknik olarak, gerçek dünyada `git clone` komutu, uzak depoların (örneğin GitHub'dan) yerel kopyalarını oluşturmak için kullanacağınız komuttur. Ancak Learn Git Branching'de biz bu komutu biraz farklı kullanıyoruz -- `git clone`, aslında yerel deponuzu bir uzak depoya dönüştürür. Gerçek komutun anlamının tam tersini yapsa da, bu, klonlama ve uzak depo çalışmaları arasındaki bağlantıyı kurmaya yardımcı olur, bu yüzden şimdilik böyle kullanacağız.",
+              ""
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Hadi yavaşça başlayalım ve bir uzak deponun neye benzediğine bakalım (görselleştirmemizde).",
+              ""
+            ],
+            "afterMarkdowns": [
+              "İşte bu! Şimdi projemizin bir uzak deposuna sahibiz. Görünüşü oldukça benzer, ancak ayırt edici bir fark yaratmak için bazı görsel değişiklikler yapıldı -- sonraki seviyelerde bu depolar arasında nasıl çalıştığımızı paylaşacağınızı göreceksiniz."
+            ],
+            "command": "git clone",
+            "beforeCommand": ""
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Bu seviyeyi bitirmek için mevcut deponuzu sadece `git clone` komutuyla klonlayın. Gerçek öğrenme sonraki derslerde olacak."
             ]
           }
         }

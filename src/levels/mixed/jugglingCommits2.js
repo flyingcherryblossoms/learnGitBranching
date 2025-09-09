@@ -9,7 +9,7 @@ exports.level = {
   "goalAsserts": {
     "main": [
       function (data) {
-        return data.C2 >= data.C3;
+        return data.C2 > data.C3;
       },
       function (data) {
         return data.C2 > data.C1;
@@ -29,12 +29,15 @@ exports.level = {
     "ja": "コミットをやりくりする その2",
     "zh_CN": "提交的技巧 #2",
     "zh_TW": "commit 的戲法 #2",
+    "ro": "Jonglarea cu commit-uri #2",
     "ru_RU": "Жонглируем коммитами №2",
     "uk": "Жонглюємо комітами #2",
     "vi": "Tung hứng commit #2",
     "sl_SI": "Žongliranje s Commiti #2",
     "it_IT": "Giocoliere di commit #2",
     "pl": "Żonglowanie commitami #2",
+    "ta_IN": "Commitகளுடன் வித்தைகள் #2",
+    "tr_TR": "Commit'leri Şekillendirme #2"
   },
   "hint": {
     "en_US": "Don't forget to forward main to the updated changes!",
@@ -49,13 +52,15 @@ exports.level = {
     "ko": "main을 변경 완료한 커밋으로 이동(forward)시키는 것을 잊지 마세요!",
     "zh_CN": "别忘记了将 main 快进到最新的更新上！",
     "zh_TW": "別忘記了將 main 推到最新的 commit 上面！",
+    "ro": "Nu uita să avansezi main la ultimele modificări!",
     "ru_RU": "Не забудь переместить main на последние изменения.",
     "uk": "Не забудь перемістити main на останні зміни!",
     "vi": "Đừng quên đẩy nhánh main lên cập nhật mới nhất!",
     "sl_SI": "Ne pozabi prestaviti main naprej na posodobljene spremembe.",
-    "it_IT":
-      "Non dimenticare di avanzare il main verso le ultime modifiche aggiornate!",
+    "it_IT": "Non dimenticare di avanzare il main verso le ultime modifiche aggiornate!",
     "pl": "Nie zapomnij sforwardować maina do najnowszych zmian!",
+    "ta_IN": "Main ஐ புதுப்பிக்கப்பட்ட மாற்றங்களுக்கு முன்னேற்றமிடுவதை மறக்க வேண்டாம்!",
+    "tr_TR": "Main'i yaptığınız değişikliklere ilerletmeyi unutmayın!"
   },
   "startDialog": {
     "en_US": {
@@ -568,6 +573,49 @@ exports.level = {
         }
       ]
     },
+    "ro": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Jonglarea cu commit-uri #2",
+              "",
+              "*Dacă nu ai terminat Jonglarea cu commit-uri #1 (nivelul anterior), te rog să o faci înainte de a continua*",
+              "",
+              "După cum ai văzut în ultimul nivel, am folosit `rebase -i` pentru a reordona commit-urile. Odată ce commit-ul pe care voiam să-l schimbam era în vârf, am putut să-l modificăm ușor cu --amend și apoi să-l reordonăm înapoi la ordinea noastră dorită.",
+              "",
+              "Singura problemă aici este că există o mulțime de reordonări, ceea ce poate introduce conflicte de rebase. Să ne uităm la o altă metodă folosind `git cherry-pick`."
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Amintește-ți că git cherry-pick va adăuga un commit din orice parte a arborelui la HEAD (atâta timp cât acel commit nu este un strămoș al HEAD).",
+              "",
+              "Iată o mică demonstrație pentru a-ți reaminti:"
+            ],
+            "afterMarkdowns": [
+              "Super! Să continuăm."
+            ],
+            "command": "git cherry-pick C2",
+            "beforeCommand": "git checkout -b bugFix; git commit; git checkout main; git commit"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Deci, în acest nivel, trebuie să atingem același obiectiv de a modifica `C2`, dar să evităm utilizarea `rebase -i`. Îți las ție să descoperi cum! :D",
+              "",
+              "Ține minte, numărul exact de apostrofe (') din commit nu este important, ci doar diferențele relative. De exemplu, voi acorda puncte unui arbore care se potrivește cu arborele țintă, dar are un apostrof în plus peste tot."
+            ]
+          }
+        }
+      ]
+    },
     "ru_RU": {
       "childViews": [
         {
@@ -664,9 +712,9 @@ exports.level = {
               "",
               "*Nếu bạn vẫn chưa hoàn thành Tung hứng Commit #1 (cấp độ trước), hãy làm nó trước khi tiếp tục*",
               "",
-              "Như bạn đã thấy ở cấp độ trước, ta dùng `rebase -i` để sắp xếp lại các commit. Một khi commit mà ta muốn sửa đã ở trên cùng, ta có thể dễ dàng --chỉnh sửa(amend) nó và sau đó sắp xếp lại trật tự lúc trước.",
+              "Như bạn đã thấy ở cấp độ trước, ta dùng `rebase -i` để sắp xếp lại các commit. Một khi commit mà ta muốn sửa đã ở trên cùng, ta có thể dễ dàng --chỉnh sửa (amend) nó và sau đó sắp xếp lại trật tự lúc trước.",
               "",
-              "Nhưng mà vẫn tồn tại vấn đề khi mà ta sắp xếp quá nhiều, điều này có thể dẫn đến xung đột khi rebase. Thử dùng cách khác với `git cherry-pick` nào"
+              "Nhưng mà vẫn tồn tại vấn đề khi mà ta sắp xếp quá nhiều, điều này có thể dẫn đến xung đột khi rebase. Thử dùng cách khác với `git cherry-pick` nào."
             ]
           }
         },
@@ -691,7 +739,7 @@ exports.level = {
             "markdowns": [
               "Vậy thì ở cấp độ này, hãy làm hoàn thành mục tiêu tương tự là chỉnh sửa `C2` một lần nhưng hãy tránh dùng `rebase -i`. Tự tìm cách đi nhé! :D",
               "",
-              "Nhớ rằng, số lượng dấu nháy dơn (') trên commit không quan trọng, quan trọng là mối tương liên các tham chiếu. Nói cách khác, kể cả bất cứ commit nào của bạn có thêm một đấu(') tôi vẫn công nhận đáp án của bạn"
+              "Nhớ rằng, số lượng dấu nháy đơn (') trên commit không quan trọng, quan trọng là sự khác biệt tương đối. Nói cách khác, kể cả bất cứ commit nào của bạn có thêm một đấu(') tôi vẫn công nhận đáp án của bạn"
             ]
           }
         }
@@ -784,47 +832,133 @@ exports.level = {
       ]
     },
     "it_IT": {
-      childViews: [
+      "childViews": [
         {
-          type: "ModalAlert",
-          options: {
-            markdowns: [
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
               "## Giocoliere di commit #2",
               "",
               "*Se non hai completato Giocoliere di commit #1 (il livello precedente), sei pregato di farlo prima di proseguire*",
               "",
               "Come hai visto nell'ultimo livello, abbiamo usato `rebase -i` per riordinare i commit. Una volta che il commit che volevamo modificare era in cima, abbiamo potuto facilmente fare --amend per poi ritornare nell'ordine di partenza.",
               "",
-              "L'unico problema qui è che ci sono tanti riordini da fare, che può portare a conflitti nel rebase. Vediamo di farlo attraverso il metodo `git cherry-pick`.",
-            ],
-          },
+              "L'unico problema qui è che ci sono tanti riordini da fare, che può portare a conflitti nel rebase. Vediamo di farlo attraverso il metodo `git cherry-pick`."
+            ]
+          }
         },
         {
-          type: "GitDemonstrationView",
-          options: {
-            beforeMarkdowns: [
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
               "Ricorda che git cherry-pick creerà un qualsiasi commit del repository su HEAD (a condizione che il commit non sia un antenato di HEAD).",
               "",
-              "Qui un breve demo per rinfrescare la memoria:",
+              "Qui un breve demo per rinfrescare la memoria:"
             ],
-            afterMarkdowns: ["Grande! Andiamo avanti."],
-            command: "git cherry-pick C2",
-            beforeCommand:
-              "git checkout -b bugFix; git commit; git checkout main; git commit",
-          },
+            "afterMarkdowns": [
+              "Grande! Andiamo avanti."
+            ],
+            "command": "git cherry-pick C2",
+            "beforeCommand": "git checkout -b bugFix; git commit; git checkout main; git commit"
+          }
         },
         {
-          type: "ModalAlert",
-          options: {
-            markdowns: [
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
               "In questo livello, dobbiamo fare amend di `C2` una volta, evitando di usare `rebase -i`. Lascerò a te il compito di scoprire come farlo! :D",
               "",
-              "Ricorda, il numero esatto di apostrofi sul commit non sono importanti, solo le differenze tra essi. Per esempio, considererò l'albero che corrisponde a quello della soluzione ma che ha un apostrofo extra dappertutto.",
-            ],
-          },
-        },
-      ],
+              "Ricorda, il numero esatto di apostrofi sul commit non sono importanti, solo le differenze tra essi. Per esempio, considererò l'albero che corrisponde a quello della soluzione ma che ha un apostrofo extra dappertutto."
+            ]
+          }
+        }
+      ]
     },
-
+    "ta_IN": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Commit-ஐ யோசித்து நடத்தியல் #2",
+              "",
+              "*இறுதியில் Commit-ஐ யோசித்து நடத்தியல் #1 (முந்தைய நிலை) முடிக்கவில்லை என்றால், அதை முடித்துக்கொண்டு தொடரவும்*",
+              "",
+              "கடந்த நிலைகளில், commit-ஐ மறுசீரமைக்க `rebase -i` ஐ பயன்படுத்தினோம். நாம் மாற்ற விரும்பிய commit மேல் வந்தபோது, அதை எளிதாக --amend செய்து, விரும்பிய வரிசையில் மறுபடியும் சீரமைத்தோம்.",
+              "",
+              "இந்த நிலைத் திடீர் சிக்கல்களை உருவாக்கும் பல மறுசீரமைப்புகளை கொண்டுள்ளது. அதனால் `git cherry-pick` என்ற மற்றொரு முறையை பார்க்கலாம்."
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "நீங்கள் நினைவில் வைக்க வேண்டும், `git cherry-pick` எந்த commit-ஐயும் HEAD இல் வைக்க முடியும் (அந்த commit HEAD இன் முன்னோடியல்லாமல் இருக்க வேண்டும்).",
+              "",
+              "இங்கே ஒரு சிறிய திரும்பப் பார்வை:"
+            ],
+            "afterMarkdowns": [
+              "சிறந்தது! 이제 계속 진행합시다."
+            ],
+            "command": "git cherry-pick C2",
+            "beforeCommand": "git checkout -b bugFix; git commit; git checkout main; git commit"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "இந்த நிலை-ல், நாம் `C2` ஐ ஒரே தடவையோ மாற்ற வேண்டும் ஆனால் `rebase -i` ஐ பயன்படுத்தாமல் அதை செய்ய வேண்டும். நான் உங்களுக்கு அதை கண்டுபிடிக்க விடுகிறேன்! :D",
+              "",
+              "நினைவில் வைக்கவும், commit-இல் உள்ள குறிப்பிட்ட எண்ணிக்கையான apostrophe-கள் (') முக்கியம் இல்லை, ஆனால் அந்த commit-இன் சமிக்ஞைகளில் உள்ள வித்தியாசங்கள் தான் முக்கியம். உதாரணமாக, நான் ஒரு மரத்தில், இலக்கு மரத்திற்கு பொருந்தும்போது, ஒரு கூடுதல் apostrophe உள்ளதையும் அளிப்பேன்."
+            ]
+          }
+        }
+      ]
+    },
+    "tr_TR": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Commit Hokkabazlığı #2",
+              "",
+              "*Eğer Commit Hokkabazlığı #1'i (bir önceki level) bitirmediyseniz, devam etmeden önce lütfen önce o bölümü bitirin*",
+              "",
+              "Bir önceki seviyeden hatırlayacağınız gibi, `rebase -i` kullanarak commit'leri yeniden sıralayabiliyorduk. Değiştirmek istediğimiz commit en üstte olduğunda, onu kolayca düzeltebilir `--amend` ve tercih ettiğimiz sıraya yeniden düzenleyebilirdik.",
+              "",
+              "Tek sorun şu ki, birçok yeniden sıralama yapıldığında, bu yeniden sıralama çatışmalarını ortaya çıkarabilir. Başka bir yöntemi, git cherry-pick ile inceleyelim."
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Unutmayın ki git cherry-pick, HEAD'in herhangi bir yerinde (bu commit, HEAD'in atası değilse) bulunan bir commit'i HEAD üzerine bırakacaktır.",
+              "",
+              "İşte küçük bir hatırlatma demosu:"
+            ],
+            "afterMarkdowns": [
+              "Harika! Devam Edelim."
+            ],
+            "command": "git cherry-pick C2",
+            "beforeCommand": "git checkout -b bugFix; git commit; git checkout main; git commit"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Bu seviyede, `C2` commit'ini düzeltmek için `rebase -i` kullanmadan aynı sonuca ulaşmaya çalışın. Nasıl ulaşabileceğimizi size bırakıyorum! :D",
+              "",
+              "Unutmayın, commit'lerdeki tırnakların (') tam olarak eşleşmesi önemli değil, yalnızca göreceli farklar önemlidir. Örneğin, hedef ağaçla eşleşen ancak her yerde ekstra bir tırnak bulunan bir ağaçtan da puan alınabilir."
+            ]
+          }
+        }
+      ]
+    }
   }
 };

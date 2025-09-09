@@ -13,13 +13,15 @@ exports.level = {
     "de_DE": "Änderungen vom Remote zusammenführen",
     "ja": "リモートとのmerge",
     "fr_FR": "Fusionner avec les branches distantes",
+    "ro": "Fuzionare cu remote",
     "ru_RU": "Слияние с удалённым репозиторием",
     "ko": "원격 작업과 merge하기",
     "uk": "Мердж з віддаленим репозиторієм",
     "vi": "Hợp nhất nhánh từ xa",
     "sl_SI": "Merganje z oddaljenim repozitorijem",
     "pl": "Scalanie z remote",
-    "it_IT": "Fondere in remoto"
+    "it_IT": "Fondere in remoto",
+    "tr_TR": "Uzak Sunucularla Birleştirme"
   },
   "hint": {
     "en_US": "Pay attention to the goal tree!",
@@ -32,13 +34,15 @@ exports.level = {
     "de_DE": "Beachte den Ziel-Baum!",
     "ja": "ゴールツリーをよく見てください！",
     "fr_FR": "Respectez l'arbre représentant l'objectif !",
+    "ro": "Fii atent la arborele din vizualizare!",
     "ru_RU": "Внимательно посмотрите на цель уровня!",
     "ko": "goal을 잘 살펴보세요!",
     "uk": "Уважно подивись як має виглядати результат!",
     "vi": "Hãy để ý đến cây mục tiêu!",
     "sl_SI": "Poglej si ciljno drevo!",
     "pl": "Zwróć uwagę, jak wygląda docelowe drzewo!",
-    "it_IT": "Fai attenzione all'albero nell'obiettivo"
+    "it_IT": "Fai attenzione all'albero nell'obiettivo",
+    "tr_TR": "Hedef ağacına dikkat et!"
   },
   "compareOnlyMain": true,
   "startDialog": {
@@ -492,6 +496,51 @@ exports.level = {
         }
       ]
     },
+    "ro": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## De ce nu facem merge?",
+              "",
+              "Pentru a face push noilor actualizări către remote, tot ce trebuie să faci este să *încorporezi* ultimele modificări de pe remote. Asta înseamnă că poți face fie rebase *sau* merge pe ramura remote (de exemplu, `o/main`).",
+              "",
+              "Deci, dacă poți face oricare dintre metode, de ce lecțiile s-au concentrat până acum pe rebase? De ce nu există dragoste pentru `merge` atunci când lucrăm cu remote?",
+              ""
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Există multe dezbateri în comunitatea dezvoltatorilor despre avantajele și dezavantajele între merge și rebase. Iată avantajele și dezavantajele generale ale rebase-ului:",
+              "",
+              "Avantaje:",
+              "",
+              "* Rebase-ul face ca arborele tău de commit-uri să arate foarte curat, deoarece totul este într-o linie dreaptă",
+              "",
+              "Dezavantaje:",
+              "",
+              "* Rebase-ul modifică istoricul arborelui de commit-uri.",
+              "",
+              "De exemplu, commit-ul `C1` poate fi mutat *după* `C3`. Apoi pare că munca pentru `C1'` a venit după `C3`, când de fapt a fost finalizată înainte.",
+              "",
+              "Unii dezvoltatori iubesc să păstreze istoria și, prin urmare, preferă să facă merge. Alții (ca mine) preferă să aibă un arbore de commit-uri curat și preferă rebase-ul. Totul se reduce la preferințe :D"
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Pentru acest nivel, să încercăm să rezolvăm nivelul anterior, dar cu *merge* în schimb. Poate fi puțin complicat, dar ilustrează bine punctul."
+            ]
+          }
+        }
+      ]
+    },
     "ru_RU": {
       "childViews": [
         {
@@ -635,9 +684,9 @@ exports.level = {
             "markdowns": [
               "## Tại sao không hợp nhất?",
               "",
-              "Để có thể đẩy cập nhật của bạn lên kho nhánh từ xa, tất cả những gì bạn cần làm là *kết nạp* thay đổi mới nhất từ nhánh từ xa. Nghĩa là bạn có thể dùng tái bố trí *hoặc* hợp nhất với nhánh từ xa (ví dụ `o/main`).",
+              "Để có thể đẩy cập nhật của bạn lên kho nhánh từ xa, tất cả những gì bạn cần làm là *kết nạp* thay đổi mới nhất từ nhánh từ xa. Nghĩa là bạn có thể dùng rebase *hoặc* merge với nhánh từ xa (ví dụ `o/main`).",
               "",
-              "Vậy ta có thể sử dụng một trong 2 cách, thì tại sao đến giờ ta chỉ tập trung vào tái bố trí trong các bài học? Tại sao khi làm việc với nhánh từ xa lại ta lại không thích `hợp nhất` (`merge`)?",
+              "Vậy ta có thể sử dụng một trong 2 cách, thì tại sao đến giờ ta chỉ tập trung vào rebase trong các bài học? Tại sao khi làm việc với nhánh từ xa lại ta lại không thích `hợp nhất` (`merge`)?",
               ""
             ]
           }
@@ -646,19 +695,19 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "Trong cộng đồng phát triền phần mềm có rất nhiều tranh luận về ưu, nhươc, khuyết của việc sử dụng tái bố trí(`rebase`) hay hợp nhất(`merge`). Dưới đây là một vài ưu / nhược cơ bản của tái bố trí:",
+              "Trong cộng đồng phát triển phần mềm có rất nhiều tranh luận về ưu, nhược, khuyết của việc sử dụng tái bố trí (`rebase`) hay hợp nhất (`merge`). Dưới đây là một vài ưu / nhược cơ bản của rebase:",
               "",
               "Ưu điểm:",
               "",
-              "* Tái bố trí làm cây commit của bạn trông gọn gàng hơn nhiều vì mọi thứ được xếp theo đường thẳng",
+              "* Rebase làm cây commit của bạn trông gọn gàng hơn nhiều vì mọi thứ được xếp theo đường thẳng",
               "",
               "Nhược điểm:",
               "",
-              "* Tái bố trí sửa đổi lịch sử (biểu hiện) của cây commit.",
+              "* Rebase sửa đổi lịch sử của cây commit.",
               "",
               "Ví dụ, commit `C1` có thể bố trí lên *sau* `C3`. Thế là `C1'` biểu hiện như là nó xuất hiện sau `C3` trong khi thực tế nó được hoàn thành trước đó.",
               "",
-              "Có những nhà phát triển muốn tôn trọng tính lịch sự nên họ ưa thích hợp nhất hơn. Những người khác (như tôi chẳng hạn) thì thiên về tái bố trí hơn vì muốn có cây commit gọn gàng. Rốt cục cũng là thiên hướng thôi :D"
+              "Một số nhà phát triển thích lưu giữ lịch sử nên họ ưa thích merge hơn. Những người khác (như tôi chẳng hạn) thì thiên về rebase hơn vì muốn có cây commit gọn gàng. Rốt cuộc cũng chỉ phụ thuộc vào sở thích cá nhân thôi :D"
             ]
           }
         },
@@ -666,7 +715,7 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "Ở cấp độ này, hãy thử giải bài tập trước nhưng mà với *hợp nhất*. Có lẽ bài này hơi thừa nhưng mà nó mịnh họa quan điểm trên rõ ràng hơn."
+              "Ở cấp độ này, hãy thử giải bài tập trước đó nhưng dùng *hợp nhất*. Có lẽ bài này hơi thừa nhưng mà nó minh họa quan điểm trên rõ ràng hơn."
             ]
           }
         }
@@ -807,5 +856,50 @@ exports.level = {
         }
       ]
     },
+    "tr_TR": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Neden merge yapmıyoruz?",
+              "",
+              "Yeni güncellemeleri uzak depoya gönderebilmek için tek yapmanız gereken, uzak depodaki en son değişiklikleri *dahil etmek*. Yani ya *rebase* yapabilir ya da uzak dalı (örneğin `o/main`) *merge* edebilirsiniz.",
+              "",
+              "O zaman her iki yöntemle de bunu yapabiliyorsanız, neden dersler şu ana kadar sadece rebase yapmaya odaklandı? Neden merge ile uzak depolarla çalışmaya hiç yer verilmedi?",
+              ""
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Geliştirme topluluğunda, merge ve rebase arasındaki avantajlar ve dezavantajlar hakkında çok fazla tartışma bulunmaktadır. İşte rebase'in genel artıları / eksileri:",
+              "",
+              "Artılar:",
+              "",
+              "* Rebase, commit ağacınızı çok temiz gösterir çünkü her şey düz bir çizgide olur.",
+              "",
+              "Eksiler:",
+              "",
+              "* Rebase, commit ağacının (görünürdeki) geçmişini değiştirir.",
+              "",
+              "Örneğin, `C1` commit'i, `C3`'ün *öncesine* rebase edilebilir. Bu durumda `C1'`in çalışması aslında daha önce yapılmışken, sanki `C3`ten sonra yapılmış gibi görünür.",
+              "",
+              "Bazı geliştiriciler tarihi korumayı sever ve bu yüzden merge yapmayı tercih eder. Diğerleri (benim gibi) temiz bir commit ağacını tercih eder ve rebase yapmayı sever. Sonuçta bu tamamen tercihe bağlı :D"
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Bu seviyede, önceki seviyeyi *merge* kullanarak çözmeyi deneyelim. Biraz karışabilir ama durumu iyi şekilde gösterecektir."
+            ]
+          }
+        }
+      ]
+    }
   }
 };

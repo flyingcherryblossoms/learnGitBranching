@@ -13,13 +13,15 @@ exports.level = {
     "de_DE": "Denk dran, du kannst immer undo oder reset benutzen, um deine Befehle zurück zu nehmen.",
     "ja": "undoやresetコマンドをいつでも使用することができるのをお忘れなく",
     "fr_FR": "Rappelez-vous que vous pouvez toujours utiliser les commandes undo et reset.",
+    "ro": "Amintește-ți că poți folosi oricând comenzile undo sau reset",
     "ru_RU": "Помни - ты всегда можешь отменить команды с помощью undo или reset",
     "ko": "명령어를 undo와 reset으로 되돌릴 수 있다는 것을 잊지마세요",
     "uk": "Пам'ятай, ти в будь-який момент можеш використовувати команди undo або reset",
-    "vi": "Nhớ rằng bạn luôn luôn có thể hoàn tác hoặc soạn lại câu lệnh ",
+    "vi": "Nhớ rằng bạn luôn luôn có thể hoàn tác hoặc soạn lại câu lệnh",
     "sl_SI": "Vedno lahko razveljaviš ukaz ali ponastaviš stopnjo.",
     "pl": "Pamiętaj, że zawsze możesz skorzystać z poleceń undo i reset",
-    "it_IT": "Ricorda che puoi sempre usare i comandi undo e reset"
+    "it_IT": "Ricorda che puoi sempre usare i comandi undo e reset",
+    "tr_TR": "Unutmayın, her zaman undo veya reset komutlarını kullanabilirsiniz."
   },
   "name": {
     "en_US": "Push Main!",
@@ -32,13 +34,15 @@ exports.level = {
     "de_DE": "Push Main!",
     "ja": "Push Main!",
     "fr_FR": "Maître du push !",
+    "ro": "Push Main!",
     "ru_RU": "Push Мастер!",
     "ko": "Push Main!",
     "uk": "Push Maйстер!",
     "vi": "Push Main!",
     "sl_SI": "Push Main!",
     "pl": "Wypychanie dla wytrwałych!",
-    "it_IT": "Push main!"
+    "it_IT": "Push main!",
+    "tr_TR": "Main'i Push Et!"
   },
   "compareOnlyMainHashAgnostic": true,
   "startDialog": {
@@ -519,6 +523,59 @@ exports.level = {
         }
       ]
     },
+    "ro": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Merge a ramurilor cu funcționalități",
+              "",
+              "Acum că ești confortabil cu fetch, pull și push, hai să punem la încercare aceste abilități cu un nou flux de lucru.",
+              "",
+              "Este obișnuit ca dezvoltatorii de pe proiecte mari să își facă toată munca pe ramuri cu funcționalități (de la `main`) și apoi să integreze acea muncă doar atunci când este gata. Acest lucru este similar cu lecția anterioară (unde ramurile secundare erau împinse către remote), dar aici introducem un pas în plus.",
+              "",
+              "Unii dezvoltatori fac push și pull doar când sunt pe ramura `main` -- astfel `main` rămâne mereu actualizat cu ceea ce este pe remote (`o/main`).",
+              "",
+              "Deci, pentru acest flux de lucru combinăm două lucruri:",
+              "",
+              "* integrarea muncii din ramurile cu funcționalități în `main`, și",
+              "* pull și push de la remote"
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Să ne reamintim rapid cum să actualizăm `main` și să partajăm munca făcută."
+            ],
+            "afterMarkdowns": [
+              "Am executat două comenzi aici:",
+              "",
+              "* rebase pentru a muta schimbările de la remote pe noi commit-uri, și",
+              "* push pentru a publica munca noastră pe remote"
+            ],
+            "command": "git pull --rebase; git push",
+            "beforeCommand": "git clone; git commit; git fakeTeamwork"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Acest nivel este destul de complex -- iată o schiță generală pentru a-l rezolva:",
+              "",
+              "* Există trei ramuri cu funcționalități -- `side1`, `side2` și `side3`",
+              "* Vrem să partajăm fiecare dintre aceste funcționalități, în ordine, către remote",
+              "* La remote au fost făcute unele modificări, așa că va trebui să integrăm și acea muncă",
+              "",
+              ":O intens! Mult noroc, finalizarea acestui nivel reprezintă un pas important."
+            ]
+          }
+        }
+      ]
+    },
     "ru_RU": {
       "childViews": [
         {
@@ -741,7 +798,7 @@ exports.level = {
               "",
               "Giờ thì bạn đã quen thuộc với tìm nạp, kéo và đẩy, bây giờ chúng tôi sẽ kiểm tra kỹ năng của bạn với một quy trình làm việc mới.",
               "",
-              "Trong các dự án lớn, các nhà phát triển thường làm việc trên các nhánh tính năng (được phân nhánh từ `main`) và chỉ thực hiện tích hợp sau khi công việc hoàn thành. Điều này tương tự như mô tả trong bài học trước (đẩy nhánh bên sang kho lưu trữ từ xa), nhưng chúng ta sẽ đi sâu hơn một chút trong phần này.",
+              "Trong các dự án lớn, các nhà phát triển thường làm việc trên các nhánh tính năng (feature branch) (được phân nhánh từ `main`) và chỉ thực hiện tích hợp sau khi công việc hoàn thành. Điều này tương tự như mô tả trong bài học trước (đẩy nhánh bên sang kho lưu trữ từ xa), nhưng chúng ta sẽ đi sâu hơn một chút trong phần này.",
               "",
               "Một vài nhà phát triển chỉ thực hiện đẩy và kéo khi ở trên nhánh `main` -- như vậy thì nhánh `main` luôn luôn được cập nhật với nhánh từ xa (`o/main`).",
               "",
@@ -774,9 +831,9 @@ exports.level = {
             "markdowns": [
               "Cấp độ này khá là phức tạp đấy -- để hoàn thành thì hãy xem qua hướng dẫn cơ bản sau:",
               "",
-              "* Có 3 nhánh chức năng là -- `side1` `side2` vả `side3`",
+              "* Có 3 nhánh chức năng là -- `side1`, `side2` và `side3`",
               "* Chúng tôi muốn bạn đẩy từng nhánh chức năng, theo thứ tự, lên nhánh từ xa",
-              "* Nhánh từ xa cũng đã được cập nhật, nên ta cũng cần sát nhập thay đổi đó nữa",
+              "* Nhánh từ xa cũng đã được cập nhật, nên ta cũng cần sáp nhập thay đổi đó nữa",
               "",
               ":O khoai đây! Cố lên nhé, hoàn thành cấp độ này là lên trình nhiều lắm đấy."
             ]
@@ -943,5 +1000,58 @@ exports.level = {
         }
       ]
     },
+    "tr_TR": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Özellik Dalı Birleştirme",
+              "",
+              "Artık fetch, pull ve push işlemleri konusunda rahat olduğunuza göre, bu becerileri yeni bir iş akışı ile test edelim.",
+              "",
+              "Büyük projelerde geliştiricilerin tüm çalışmalarını özellik dallarında (`main` dalından) yapmaları ve bu çalışmaları yalnızca hazır olduklarında entegre etmeleri yaygın bir durumdur. Bu, önceki derse benzer (yan dalların uzaktaki depoya gönderilmesi gibi), ancak burada bir adım daha ekliyoruz.",
+              "",
+              "Bazı geliştiriciler yalnızca `main` dalında olduklarında push ve pull işlemi yapar -- bu şekilde `main` her zaman uzaktaki `o/main` ile güncel olur.",
+              "",
+              "Bu iş akışında iki şeyi birleştiriyoruz:",
+              "",
+              "* Özellik dalı çalışmalarını `main` dalına entegre etmek ve",
+              "* Uzaktan push ve pull işlemi yapmak"
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "`main` dalını güncelleme ve çalışmayı push etme işlemini hızlıca gözden geçirelim."
+            ],
+            "afterMarkdowns": [
+              "Burada iki komut çalıştırdık ki bunlar:",
+              "",
+              "* Çalışmamızı uzak depodan gelen yeni commit'lere rebase etti, ve",
+              "* Çalışmamızı uzak depoya gönderdi"
+            ],
+            "command": "git pull --rebase; git push",
+            "beforeCommand": "git clone; git commit; git fakeTeamwork"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Bu seviye oldukça zorlu -- çözmek için genel bir çizelge:",
+              "",
+              "* Üç özellik dalı var -- `side1`, `side2`, ve `side3`",
+              "* Bu özelliklerin her birini sırasıyla uzak depoya push etmemiz gerekiyor",
+              "* Uzak depo zaten güncellendi, bu yüzden bu çalışmaları da entegre etmemiz gerekecek",
+              "",
+              ":O yoğun! İyi şanslar, bu seviyeyi tamamlamak büyük bir adım."
+            ]
+          }
+        }
+      ]
+    }
   }
 };

@@ -1,10 +1,11 @@
 exports.level = {
   "goalTreeString": "{\"branches\":{\"main\":{\"target\":\"C1\",\"id\":\"main\",\"remoteTrackingBranchID\":\"o/main\"},\"o/main\":{\"target\":\"C1\",\"id\":\"o/main\",\"remoteTrackingBranchID\":null},\"feature\":{\"target\":\"C2\",\"id\":\"feature\",\"remoteTrackingBranchID\":\"o/feature\"},\"o/feature\":{\"target\":\"C2\",\"id\":\"o/feature\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"},\"C2\":{\"parents\":[\"C1\"],\"id\":\"C2\"}},\"tags\":{},\"HEAD\":{\"target\":\"feature\",\"id\":\"HEAD\"},\"originTree\":{\"branches\":{\"main\":{\"target\":\"C1\",\"id\":\"main\",\"remoteTrackingBranchID\":null},\"feature\":{\"target\":\"C2\",\"id\":\"feature\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"},\"C2\":{\"parents\":[\"C1\"],\"id\":\"C2\"}},\"tags\":{},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}}",
-  "solutionCommand": "git reset --hard o/main;git checkout -b feature C2; git push origin feature",
+  "solutionCommand": "git branch -f main o/main; git checkout -b feature C2; git push origin feature",
   "startTree": "{\"branches\":{\"main\":{\"target\":\"C2\",\"id\":\"main\",\"remoteTrackingBranchID\":\"o/main\"},\"o/main\":{\"target\":\"C1\",\"id\":\"o/main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"},\"C2\":{\"parents\":[\"C1\"],\"id\":\"C2\"}},\"tags\":{},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"},\"originTree\":{\"branches\":{\"main\":{\"target\":\"C1\",\"id\":\"main\",\"remoteTrackingBranchID\":null}},\"commits\":{\"C0\":{\"parents\":[],\"id\":\"C0\",\"rootCommit\":true},\"C1\":{\"parents\":[\"C0\"],\"id\":\"C1\"}},\"tags\":{},\"HEAD\":{\"target\":\"main\",\"id\":\"HEAD\"}}}",
   "hint": {
     "en_US": "Make the feature branch from the local main before resetting it back to be the same as origin's main",
     "de_DE": "Erstelle einen Feature-Branch ausgehend vom lokalen Main-Branch, bevor du den Main-Branch auf den origin/main zurücksetzt.",
+    "ro": "Creează o ramură feature din main-ul local înainte de a reseta main-ul pentru a fi la fel cu origin/main.",
     "ru_RU": "Создайте новую feature ветвь от main перед тем, как откатить изменения в main до состояния o/main.",
     "uk": "Створіть нову feature гілку від локального main перед тим, як відкотити зміни в main до стану o/main.",
     "zh_CN": "从本地的main创建一个feature分支, 然后重置main和origin main保持一致。",
@@ -17,12 +18,14 @@ exports.level = {
     "es_AR": "Crea la rama feature desde la rama main en local antes de restablecerlo para que sea el mismo que la rama main de origen.",
     "ja": "mainブランチをoriginのmainと同じ状態になるようにリセットする前に、ローカルのmainからfeatureブランチを作成します。",
     "pl": "Stwórz boczną gałąź tematyczną (feature) z lokalnego main, a późnej zsynchronizuj ją z main na origin",
-    "vi": "Tạo những nhánh tính năng từ nhánh địa phương trước khi trả chúng về lại giống như o/main",
-    "it_IT": "Crea il ramo per la feature a partire dal main locale prima di resettarlo al pari del main remoto"
+    "vi": "Tạo những nhánh tính năng từ nhánh cục bộ trước khi trả chúng về lại giống như o/main",
+    "it_IT": "Crea il ramo per la feature a partire dal main locale prima di resettarlo al pari del main remoto",
+    "tr_TR": "Özellik dalını, origin/main ile aynı olacak şekilde sıfırlamadan önce yerel main'den oluşturun."
   },
   "name": {
     "en_US": "Locked Main",
     "de_DE": "Gesperrter Main-Branch",
+    "ro": "Main Blocat",
     "ru_RU": "Заблокированная ветвь main",
     "uk": "Заблокована гілка main",
     "zh_CN": "锁定的Main(Locked Main)",
@@ -36,7 +39,8 @@ exports.level = {
     "ja": "ロックされたmain",
     "pl": "Zablokowany main",
     "vi": "Nhánh chính bị khóa (Locked Main)",
-    "it_IT": "Main bloccato"
+    "it_IT": "Main bloccato",
+    "tr_TR": "Kilitli Main"
   },
   "startDialog": {
     "en_US": {
@@ -159,6 +163,46 @@ exports.level = {
         }
       ]
     },
+    "ro": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Remote Respins!",
+              "",
+              "Dacă lucrezi într-o echipă mare, este probabil ca ramura `main` să fie blocată și să necesite un proces de Pull Request (Cerere pentru a partaja schimbări) pentru a îmbina modificările. Dacă faci commit direct pe `main` local și încerci să faci push, vei primi un mesaj similar cu acesta:",
+              "",
+              "```",
+              " ! [remote rejected] main -> main (TF402455: Pushes to this branch are not permitted; you must use a pull request to update this branch.)",
+              "```"
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## De ce a fost respins?",
+              "",
+              "Ramura remote a respins push-ul commit-urilor direct pe `main` din cauza politicii de pe `main` care necesită utilizarea Pull Request-urilor.",
+              "",
+              "Tu ai intenționat să urmezi procesul de creare a unei ramuri, apoi să faci push acelei ramuri și să faci un Pull Request, dar ai uitat și ai făcut commit direct pe `main`. Acum ești blocat și nu poți face push cu modificările tale."
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Soluția",
+              "",
+              "Creează o altă ramură numită `feature` și împinge-o către remote. De asemenea, resetează ramura ta `main` pentru a fi sincronizată cu remote, altfel s-ar putea să ai probleme data viitoare când faci pull și commit-ul altcuiva intră în conflict cu al tău."
+            ]
+          }
+        }
+      ]
+    },
     "ru_RU": {
       "childViews": [
         {
@@ -242,7 +286,6 @@ exports.level = {
               "## Рішення:",
               "",
               "Створіть ще одну гілку з назвою `feature` і відправте зміни у віддалений репозиторій. Також не забудьте повернути вашу локальну гілку `main` в вихідне положення (щоб вона була синхронізована з віддаленою). Інакше у вас можуть виникнути складнощі при наступному виконанні запиту `git pull`, коли коміти інших розробників конфліктуватимуть з вашими."
-
             ]
           }
         }
@@ -273,7 +316,6 @@ exports.level = {
               "Se rechazó el `push` del `commit` a la rama `main` debido a la política en la rama `main` que requiere el uso de `Pull Requests`.",
               "",
               "Trataste de crear una rama y luego hacer `pushs` creando un `Pull Request`, pero te olvidaste e hiciste `commit` directamente a `main`. Ahora estás atascado y no puedes hacer `push` de tus cambios."
-
             ]
           }
         },
@@ -434,7 +476,6 @@ exports.level = {
               "Se rechazó el `push` del `commit` a la rama `main` debido a la política en la rama `main` que requiere el uso de `Pull Requests`.",
               "",
               "Trataste de crear una rama y luego hacer `pushs` creando un `Pull Request`, pero te olvidaste e hiciste `commit` directamente a `main`. Ahora estás atascado y no puedes hacer `push` de tus cambios."
-
             ]
           }
         },
@@ -571,7 +612,6 @@ exports.level = {
       ]
     },
     "pl": {
-
       "childViews": [
         {
           "type": "ModalAlert",
@@ -619,9 +659,7 @@ exports.level = {
             "markdowns": [
               "## Kết nối remote bị từ chối!",
               "",
-              "Nếu bạn làm việc trong một nhóm cộng tác lớn, có khả năng nhánh main bị khóa và yêu cầu một số quy" +
-              " trình Pull Request để hợp nhất các thay đổi. Nếu bạn commit trực tiếp với nhánh địa phương và thử" +
-              " push, bạn sẽ được chào đón bằng một thông báo tương tự như sau:",
+              "Nếu bạn làm việc trong một nhóm cộng tác lớn, có khả năng nhánh main bị khóa và yêu cầu một số quy trình Pull Request để hợp nhất các thay đổi. Nếu bạn commit trực tiếp với nhánh cục bộ và thử push, bạn sẽ được chào đón bằng một thông báo tương tự như sau:",
               "",
               "```",
               " ! [remote rejected] main -> main (TF402455: Pushes to this branch are not permitted; you must use a pull request to update this branch.)",
@@ -633,12 +671,11 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "## Why was it rejected?",
+              "## Tại sao bị từ chối?",
               "",
-              "Remote từ chối push các commit trực tiếp đến main vì chính sách của main yêu cầu các pull" +
-              " request được sử dụng thay thế.",
+              "Remote từ chối push các commit trực tiếp đến main vì chính sách của main yêu cầu các pull request được sử dụng thay thế.",
               "",
-              "You meant to follow the process creating a branch then pushing that branch and doing a pull request, but you forgot and committed directly to main. Now you are stuck and cannot push your changes."
+              "Bạn định tạo một nhánh sau đó đẩy nhánh lên rồi thực hiện pull request theo đúng quy trình, tuy nhiên bạn lại lỡ tay commit trực tiếp vào nhánh main. Bây giờ bạn bị mắc kẹt và không thể đẩy các thay đổi của mình lên."
             ]
           }
         },
@@ -646,11 +683,9 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "## The solution",
+              "## Giải pháp",
               "",
-              "Tạo một nhánh khác được gọi là feature và push nhánh đó đến remote. Đồng thời đặt lại nhánh main" +
-              " của bạn để đồng bộ với remote, nếu không bạn có thể gặp sự cố vào lần tiếp theo khi bạn thực hiện" +
-              " pull và commit của người khác xung đột với bạn."
+              "Tạo một nhánh khác được gọi là feature và push nhánh đó đến remote. Đồng thời đặt lại nhánh main của bạn để đồng bộ với remote, nếu không bạn có thể gặp sự cố vào lần tiếp theo khi bạn thực hiện pull và commit của người khác xung đột với của bạn."
             ]
           }
         }
@@ -696,5 +731,45 @@ exports.level = {
         }
       ]
     },
+    "tr_TR": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Uzak Sunucu Reddi!",
+              "",
+              "Büyük bir işbirliği ekibinde çalışıyorsanız, muhtemelen main branch'ı kilitlidir ve değişiklikleri bir Pull Request süreci ile birleştirmeniz gerekir. Eğer main'e doğrudan yerel olarak commit yapar ve push etmeye çalışırsanız, şu benzer bir mesajla karşılaşırsınız:",
+              "",
+              "```",
+              " ! [remote rejected] main -> main (TF402455: Bu branch'a push yapılmasına izin verilmiyor; bu branch'ı güncellemek için bir pull request kullanmalısınız.)",
+              "```"
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Neden reddedildi?",
+              "",
+              "Uzak sunucu, main branch'ına doğrudan commit gönderilmesini, main üzerinde sadece pull request ile değişiklik yapılması gerektiği politikasından dolayı reddetti.",
+              "",
+              "Branch oluşturup, o branch'i push edip pull request yapmak amacıyla bu süreci takip etmeliydiniz ama unutup doğrudan main'e commit yaptınız. Şimdi sıkıştınız ve değişikliklerinizi push edemiyorsunuz."
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Çözüm",
+              "",
+              "Başka bir branch oluşturun, ona feature adını verin ve bu branch'i uzak sunucuya push edin. Ayrıca main'i uzak sunucu ile senkronize etmek için sıfırlayın, aksi takdirde bir sonraki pull işleminizde başkalarının commit'leriyle çatışma yaşama riskiyle karşılaşabilirsiniz."
+            ]
+          }
+        }
+      ]
+    }
   }
 };

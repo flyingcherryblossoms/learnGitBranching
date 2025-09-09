@@ -13,17 +13,19 @@ exports.level = {
     "de_DE": "Abweichende Historie",
     "fr_FR": "Historique divergent",
     "ja": "履歴の分岐",
+    "ro": "Istorie divergentă",
     "ru_RU": "Расхождение в истории",
     "uk": "Розбіжності в історії",
     "ko": "엇갈린 히스토리",
     "vi": "Dị biệt lịch sử",
     "sl_SI": "Razdeljena Zgodovina",
     "pl": "Rozbieżna  historia",
-    "it_IT": "Storico divergente"
+    "it_IT": "Storico divergente",
+    "tr_TR": "Sapmış Tarihçe"
   },
   "hint": {
     "en_US": "Check out the ordering from the goal visualization",
-    "zh_CN": "按照目标中的提交树的顺序进行检出",
+    "zh_CN": "按照目标中的提交树的顺序进行切换",
     "zh_TW": "確認視覺化的目標中的順序",
     "es_AR": "Prestá atención al orden del objetivo",
     "es_ES": "Presta atención al orden del objetivo",
@@ -32,13 +34,15 @@ exports.level = {
     "de_DE": "Beachte die Reihenfolge in der Zieldarstellung",
     "ja": "ゴールのツリーの順番を参考にすること",
     "fr_FR": "Regardez l'ordre dans la fenêtre de visualisation d'objectif",
+    "ro": "Verifică ordinea din vizualizarea obiectivului",
     "ru_RU": "проверьте сортировку в визуализации цели",
     "uk": "перевірте порядок в візуалізації цілі",
     "ko": "순서는 goal을 참고하세요",
-    "vi": "kiểm tra kỹ thứ tự trên mô hình mục tiêu",
+    "vi": "Kiểm tra kỹ thứ tự trên mô hình mục tiêu",
     "sl_SI": "Preveri vrstni red iz ciljne vizualizacije.",
     "pl": "Przyjrzyj się kolejności na wizualizacji celu",
-    "it_IT": "Controlla l'ordinamento dalla schermata dell'obiettivo"
+    "it_IT": "Controlla l'ordinamento dalla schermata dell'obiettivo",
+    "tr_TR": "Hedef görselleştirmesindeki sıralamaya dikkat edin"
   },
   "startDialog": {
     "en_US": {
@@ -1121,7 +1125,7 @@ exports.level = {
           "type": "GitDemonstrationView",
           "options": {
             "beforeMarkdowns": [
-              "咱们们用 merge 替换 rebase 来试一下……"
+              "咱们用 merge 替换 rebase 来试一下……"
             ],
             "afterMarkdowns": [
               "我们用 `git fetch` 更新了本地仓库中的远程分支，然后**合并**了新变更到我们的本地分支（为了包含远程仓库的变更），最后我们用 `git push` 把工作推送到远程仓库"
@@ -1323,6 +1327,149 @@ exports.level = {
               "* Simuliere einen entfernten Commit mit `git fakeTeamwork`",
               "* Erzeuge einen lokalen Commit",
               "* Benutze *Rebase*, um deine Arbeit schließlich pushen zu können."
+            ]
+          }
+        }
+      ]
+    },
+    "ro": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Lucru Divergent",
+              "",
+              "Până acum am văzut cum să facem `pull`la commit-uri de la alții și cum să facem `push` modificărilor noastre. Pare destul de simplu, așa că de ce se confundă oamenii?",
+              "",
+              "Dificultatea apare atunci când istoria repozitoriului *diverge*. Înainte de a discuta detaliile, să vedem un exemplu...",
+              ""
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Imaginează-ți că clonezi un repozitoriu luni și începi să lucrezi la o funcționalitate. Până vineri ești gata să publici funcționalitatea ta -- dar oh nu! Colegii tăi au scris o grămadă de cod în timpul săptămânii care a făcut ca funcționalitatea ta să fie învechită. Ei au publicat aceste commit-uri în repozitoriul remote, așa că *munca ta* este acum bazată pe o versiune *veche* a proiectului care nu mai este relevantă.",
+              "",
+              "În acest caz, comanda `git push` este ambiguă. Dacă rulezi `git push`, ar trebui git să schimbe repozitoriul remote înapoi la starea de luni? Ar trebui să încerce să adauge codul tău fără a elimina noul cod? Sau ar trebui să ignore complet modificările tale deoarece sunt complet învechite?",
+              "",
+              "Fiindcă există atât de multă ambiguitate în această situație (unde istoria diverge), git nu îți permite să faci `push` modificărilor tale. De fapt, te forțează să integrezi starea cea mai recentă a remote-ului înainte de a putea împărtăși munca ta."
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Atâtea vorbe! Să vedem asta în acțiune."
+            ],
+            "afterMarkdowns": [
+              "Vezi? Nu s-a întâmplat nimic pentru că comanda a eșuat. `git push` eșuează deoarece ultimul tău commit `C3` este bazat pe remote-ul de la `C1`. Între timp, remote-ul a fost actualizat la `C2`, așa că git respinge push-ul tău."
+            ],
+            "command": "git push",
+            "beforeCommand": "git clone; git fakeTeamwork; git commit"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Cum rezolvi această situație? E simplu, tot ce trebuie să faci este să îți bazezi munca pe cea mai recentă versiune a ramurii remote.",
+              "",
+              "Există câteva moduri de a face asta, dar cel mai direct este să îți muți munca prin rebase. Să vedem cum arată asta."
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Acum dacă facem rebase înainte de a face push..."
+            ],
+            "afterMarkdowns": [
+              "Boom! Am actualizat reprezentarea locală a remote-ului cu `git fetch`, am făcut rebase muncii noastre pentru a reflecta noile modificări din remote și apoi le-am partajat cu `git push`."
+            ],
+            "command": "git fetch; git rebase o/main; git push",
+            "beforeCommand": "git clone; git fakeTeamwork; git commit"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Există alte moduri de a actualiza munca mea atunci când repozitoriul remote a fost actualizat? Desigur! Să vedem același lucru, dar cu `merge`.",
+              "",
+              "Deși `git merge` nu mută munca ta (ci creează un commit de merge), este o modalitate de a spune git că ai integrat toate modificările din remote. Acest lucru se datorează faptului că ramura remote este acum un *strămoș* al ramurii tale, ceea ce înseamnă că commit-ul tău reflectă toate commit-urile din ramura remote.",
+              "",
+              "Să vedem asta în acțiune..."
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Și acum dacă în loc de rebase facem merge..."
+            ],
+            "afterMarkdowns": [
+              "Boom! Am actualizat reprezentarea locală a remote-ului cu `git fetch`, *am îmbinat* noile modificări în munca noastră (pentru a reflecta noile modificări din remote) și apoi le-am împins cu `git push`."
+            ],
+            "command": "git fetch; git merge o/main; git push",
+            "beforeCommand": "git clone; git fakeTeamwork; git commit"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Minunat! Există vreo modalitate de a face asta fără să tastez atât de multe comenzi?",
+              "",
+              "Desigur -- deja știi că `git pull` este doar o scurtătură pentru un fetch și un merge. Din fericire, `git pull --rebase` este o scurtătură pentru un fetch și un rebase!",
+              "",
+              "Să vedem aceste comenzi scurtate în acțiune."
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Prima dată cu `--rebase`..."
+            ],
+            "afterMarkdowns": [
+              "Exact ca înainte! Doar că mult mai scurt."
+            ],
+            "command": "git pull --rebase; git push",
+            "beforeCommand": "git clone; git fakeTeamwork; git commit"
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Și acum cu `pull` obișnuit"
+            ],
+            "afterMarkdowns": [
+              "Din nou, exact ca înainte!"
+            ],
+            "command": "git pull; git push",
+            "beforeCommand": "git clone; git fakeTeamwork; git commit"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Această secvență de `fetch`, `rebase`/`merge` și `push` este foarte comună. În lecțiile viitoare vom explora variante mai complicate ale acestui flux de lucru, dar pentru acum hai să încercăm asta.",
+              "",
+              "Pentru a rezolva acest nivel, urmează acești pași:",
+              "",
+              "* Clonează repozitoriul tău",
+              "* Simulează o muncă a cuiva din echipă (1 commit)",
+              "* Crează un commit cu munca ta (1 commit)",
+              "* Publică munca ta prin *rebase*"
             ]
           }
         }
@@ -1908,7 +2055,7 @@ exports.level = {
             "markdowns": [
               "## Diverged Work",
               "",
-              "Cho đến giờ ta đã biết cách `kéo`(`pull`) commit từ nơi khác về và cách `đẩy`(`push`) lên những thay đổi của ta. Chúng nhìn có vẻ khá đơn giản, vậy tại sao người ta lại thấy lúng túng về chúng?",
+              "Cho đến giờ ta đã biết cách `kéo` (`pull`) commit từ nơi khác về và cách `đẩy` (`push`) lên những thay đổi của ta. Chúng nhìn có vẻ khá đơn giản, vậy tại sao người ta lại thấy lúng túng về chúng?",
               "",
               "Khó khăn đến từ sự *dị biệt* của cây lịch sử trên kho chứa từ xa. Trước khi đi vào thảo luận chi tiết vấn đề này, hãy xem qua một ví dụ...",
               ""
@@ -1921,9 +2068,9 @@ exports.level = {
             "markdowns": [
               "Tưởng tượng bạn sao chép một kho chứa vào thứ Hai và bắt đầu phát triển một tính năng mới. Đến thứ Sáu thì bạn đã sẵn sàng để xuất bản thành quả của mình -- nhưng không! Đồng nghiệp của bạn đã viết thêm hàng loạt mã trong một tuần vừa rồi và điều này làm cho chức năng của bạn trở nên lỗi thời. Và họ cũng đã xuất bản những commit này lên kho chứa từ xa chung, vậy giờ thành quả của *bạn* lại dựa trên phiên bản *cũ* của dự án mà nó không còn thích đáng nữa.",
               "",
-              "Trong trường hợp này, lệnh `git push` trở lên khá nhập nhằng. Nếu bạn dùng `git push`, liệu git nên thay đổi kho chứa từ xa trơ rveef trạng thái ngày thứ Hai? Hay nó nên cố gắng thêm mã của bạn vào trong khi không xóa mã mới? Hay là nó sẽ bỏ qua hoàn toàn mã của bạn vì nó đã lỗi thời?",
+              "Trong trường hợp này, lệnh `git push` trở lên khá nhập nhằng. Nếu bạn dùng `git push`, liệu git nên thay đổi kho chứa từ xa trở về trạng thái ngày thứ Hai? Hay nó nên cố gắng thêm mã của bạn vào trong khi không xóa mã mới? Hay là nó sẽ bỏ qua hoàn toàn mã của bạn vì nó đã lỗi thời?",
               "",
-              "Vì có quá nhiều tình huống mơ hồ (dị biệt lịch sử), git sẽ không cho phép bạn `đẩy`(`push`) thay đổi của mình. Nó sẽ ép bạn phải sát nhập trạng thái mới nhất của kho chứa từ xa vào thành phẩm của mình trước khi chia sẻ chúng."
+              "Vì có quá nhiều tình huống mơ hồ (dị biệt lịch sử), Git sẽ không cho phép bạn `đẩy` (`push`) thay đổi của mình. Nó sẽ ép bạn phải sát nhập trạng thái mới nhất của kho chứa từ xa vào thành phẩm của mình trước khi chia sẻ chúng."
             ]
           }
         },
@@ -1934,7 +2081,7 @@ exports.level = {
               "Nói quá nhiều rồi! Đi vào hành động thôi"
             ],
             "afterMarkdowns": [
-              "Thấy chứ? Không có gì xảy ra cả vì lệnh bị thất bại. `git push` thất bại vì commit mới nhất của bạn: `C3` dựa trên commit `C1` ở nhánh từ xa. Nhánh đó đã được cập nhật lên commit `C2`, nên git từ chối lệnh đẩy của bạn"
+              "Thấy chứ? Không có gì xảy ra cả vì lệnh bị thất bại. `git push` thất bại vì commit mới nhất của bạn: `C3` dựa trên commit `C1` ở nhánh từ xa. Nhánh đó đã được cập nhật lên commit `C2`, nên Git từ chối lệnh đẩy của bạn"
             ],
             "command": "git push",
             "beforeCommand": "git clone; git fakeTeamwork; git commit"
@@ -1957,7 +2104,7 @@ exports.level = {
               "Nào bây giờ trước push ta dùng rebase thì..."
             ],
             "afterMarkdowns": [
-              "Bùùm! Ta đã cập nhật nhánh từ xa trong kho chứ cục bộ với `git fetch`, dịch chuyển thành quả của mình để phản ánh thay đổi mới của kho chứa từ xa, sau đó đẩy chúng lên với `git push`."
+              "Bùùm! Ta đã cập nhật nhánh từ xa trong kho chứa cục bộ với `git fetch`, dịch chuyển thành quả của mình để phản ánh thay đổi mới của kho chứa từ xa, sau đó đẩy chúng lên với `git push`."
             ],
             "command": "git fetch; git rebase o/main; git push",
             "beforeCommand": "git clone; git fakeTeamwork; git commit"
@@ -1969,7 +2116,7 @@ exports.level = {
             "markdowns": [
               "Có cách nào khác để cập nhật thành quả của mình khi kho chứa từ xa được cập nhật không? Tất nhiên rồi! Hãy xem xét điều tương tự với `merge`.",
               "",
-              "Mặc dù `git merge` không dịch chuyển commit của bạn (thay vì đó nó tạo ra một commit hơp nhất), đó là cách để nói với git rằng bạn đã kết hợp tất cả thay đổi từ nhánh từ xa. Đó là bởi vì bây giờ nhánh từ xa đã trở thành một *tổ tiên* của nhánh cục bộ của bạn, nghĩa là commit của bạn có thể tham chiếu điến tất cả commit có ở nhánh tù xa.",
+              "Mặc dù `git merge` không dịch chuyển commit của bạn (thay vì đó nó tạo ra một commit hợp nhất), đó là cách để nói với Git rằng bạn đã kết hợp tất cả thay đổi từ nhánh từ xa. Đó là bởi vì bây giờ nhánh từ xa đã trở thành một *tổ tiên* của nhánh cục bộ của bạn, nghĩa là commit của bạn có thể tham chiếu đến tất cả commit có ở nhánh từ xa.",
               "",
               "Hãy xem qua bản biểu diễn sau..."
             ]
@@ -1982,7 +2129,7 @@ exports.level = {
               "Giờ nếu ta dùng merge thay vày rebase thì..."
             ],
             "afterMarkdowns": [
-              "Bùùm! Ta đã cập nhật đại diện nhánh từ xa tại kho chứa địa phương với `git fetch`, *hợp nhất* (*merge*) thành quả mới vào thành quả của ta (để phản ánh thay đổi ở nhánh từ xa), sau đó đẩy chúng lên với `git push`."
+              "Bùùm! Ta đã cập nhật đại diện nhánh từ xa tại kho chứa cục bộ với `git fetch`, *hợp nhất* (*merge*) thành quả mới vào thành quả của ta (để phản ánh thay đổi ở nhánh từ xa), sau đó đẩy chúng lên với `git push`."
             ],
             "command": "git fetch; git merge o/main; git push",
             "beforeCommand": "git clone; git fakeTeamwork; git commit"
@@ -2036,7 +2183,7 @@ exports.level = {
               "",
               "* Nhân bản kho chứa của bạn",
               "* Giả lập làm việc nhóm (1 commit)",
-              "* Tạo ra 1 commit địa phương",
+              "* Tạo ra 1 commit cục bộ",
               "* Xuất bản thành quả của bạn dùng *rebase*"
             ]
           }
@@ -2467,6 +2614,148 @@ exports.level = {
               "* Simula del lavoro da parte di altri (1 commit)",
               "* Effettua tu delle modifiche (1 commit)",
               "* Pubblica il tuo lavoro tramite *rebase*"
+            ]
+          }
+        }
+      ]
+    },
+    "tr_TR": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Çatışan Çalışma",
+              "",
+              "Şu ana kadar başkalarından nasıl `pull` yaparak commit alacağımızı ve kendi değişikliklerimizi nasıl `push` yapacağımızı gördük. Oldukça basit görünüyor, o zaman insanlar neden bu kadar karışabiliyor?",
+              "",
+              "Zorluk, depo geçmişi *çatıştığında* başlar. Bunun ayrıntılarını tartışmadan önce, bir örneğe göz atalım..."
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Pazartesi günü bir depo klonladığınızı ve yan bir özellik üzerinde çalışmaya başladığınızı hayal edin. Cuma günü özelliğinizi yayınlamaya hazır olduğunuzda, aman Tanrım! İş arkadaşlarınız hafta boyunca bir sürü kod yazmış ve özelliğiniz artık geçersiz ve güncel değil. Ayrıca bu commit'leri ortak uzak depoya da göndermişler, bu yüzden *sizin* çalışmanız artık eski bir proje sürümüne dayanıyor.",
+              "",
+              "Bu durumda, `git push` komutu belirsizdir. `git push` komutunu çalıştırırsanız, git uzak depoyu Pazartesi günkü haline mi döndürmeli? Kodunuzu yeni kodları silmeden mi eklemeli? Yoksa tamamen geçersiz olan değişikliklerinizi yok saymalı mı?",
+              "",
+              "Çünkü bu durumda çok fazla belirsizlik vardır (geçmiş çatıştığı için), git değişikliklerinizi `push` etmenize izin vermez. Gerçekten de, değişikliklerinizi paylaşmadan önce uzak deponun en son durumunu entegre etmenizi zorunlu kılar."
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Çok konuştuk! Hadi bu durumu pratikte görelim."
+            ],
+            "afterMarkdowns": [
+              "Görüyorsunuz değil mi? Hiçbir şey olmadı çünkü komut başarısız oldu. `git push` komutu başarısız oldu çünkü en son commit'iniz `C3`, `C1`'den alınan uzak depoya dayalıydı. Ancak uzak depo `C2`'ye güncellenmişti, bu yüzden git `push` işleminizi reddetti."
+            ],
+            "command": "git push",
+            "beforeCommand": "git clone; git fakeTeamwork; git commit"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Bu durumu nasıl çözebilirsiniz? Çok basit, tek yapmanız gereken çalışmanızı uzak dalın en son sürümüne dayandırmak.",
+              "",
+              "Bunu yapmanın birkaç yolu vardır, ancak en basit yöntem çalışmanızı rebase yaparak taşımaktır. Hadi bunu nasıl göründüğüne bakalım."
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Şimdi eğer önce rebase yaparsak..."
+            ],
+            "afterMarkdowns": [
+              "Vay! Uzak deponun yerel temsiline `git fetch` ile güncelleme yaptık, çalışmamızı uzak depodaki yeni değişiklikleri yansıtacak şekilde rebase ettik ve ardından `git push` ile gönderdik."
+            ],
+            "command": "git fetch; git rebase o/main; git push",
+            "beforeCommand": "git clone; git fakeTeamwork; git commit"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Uzak depo güncellendiyse, çalışmamı güncellemenin başka yolları var mı? Tabii ki! Aynı şeyi `merge` kullanarak da gözden geçirelim.",
+              "",
+              "`git merge` çalışmanızı taşımaz (sadece bir merge commit'i oluşturur), ancak git'e uzak deponun tüm değişikliklerini entegre ettiğinizi bildirmenin bir yoludur. Çünkü uzak dal artık kendi dalınızın *atası* haline gelir, yani commit'iniz uzak dalın tüm commit'lerini yansıtır.",
+              "",
+              "Bunu gösterelim..."
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Şimdi rebase yerine merge yapalım..."
+            ],
+            "afterMarkdowns": [
+              "Vay! Uzak deponun yerel temsiline `git fetch` ile güncelleme yaptık, yeni çalışmaları *merge* ederek çalışmamıza entegre ettik (yeni değişiklikleri yansıtmak için) ve ardından `git push` ile gönderdik."
+            ],
+            "command": "git fetch; git merge o/main; git push",
+            "beforeCommand": "git clone; git fakeTeamwork; git commit"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Harika! Peki, bu işlemi bu kadar çok komut yazmadan yapmanın bir yolu var mı?",
+              "",
+              "Tabii ki -- zaten `git pull`'ün bir fetch ve merge kısaltması olduğunu biliyorsunuz. Ne kadar pratik, `git pull --rebase` ise fetch ve rebase için kısaltmadır!",
+              "",
+              "Hadi bu kısaltma komutlarını görelim."
+            ]
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "İlk olarak `--rebase` ile..."
+            ],
+            "afterMarkdowns": [
+              "Tıpkı öncekiler gibi! Ama çok daha kısa."
+            ],
+            "command": "git pull --rebase; git push",
+            "beforeCommand": "git clone; git fakeTeamwork; git commit"
+          }
+        },
+        {
+          "type": "GitDemonstrationView",
+          "options": {
+            "beforeMarkdowns": [
+              "Şimdi ise normal `pull` ile."
+            ],
+            "afterMarkdowns": [
+              "Yine, tıpkı öncekiler gibi!"
+            ],
+            "command": "git pull; git push",
+            "beforeCommand": "git clone; git fakeTeamwork; git commit"
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Bu fetch, rebase/merge ve push iş akışı oldukça yaygındır. Gelecek derslerde bu iş akışlarının daha karmaşık versiyonlarını inceleyeceğiz, ancak şimdilik bunu deneyelim.",
+              "",
+              "Bu seviyeyi çözmek için şu adımları takip etmeniz gerekiyor:",
+              "",
+              "* Depoyu klonlayın",
+              "* Takım çalışması sahteleyin (1 commit)",
+              "* Kendi çalışmanızı commit edin (1 commit)",
+              "* Çalışmanızı *rebase* yaparak yayınlayın"
             ]
           }
         }

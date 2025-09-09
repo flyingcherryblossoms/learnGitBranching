@@ -22,6 +22,14 @@ var assertIsRef = function(engine, ref) {
   engine.resolveID(ref); // will throw git error if can't resolve
 };
 
+var assertRefNoModifiers = function(ref) {
+  if (/~|\^/.test(ref)) {
+    throw new GitError({
+      msg: intl.str('git-error-exist', {ref: ref})
+    });
+  }
+}
+
 var validateBranchName = function(engine, name) {
   return engine.validateBranchName(name);
 };
@@ -219,6 +227,7 @@ var commandConfig = {
   pull: {
     regex: /^git +pull($|\s)/,
     options: [
+      '--force',
       '--rebase'
     ],
     execute: function(engine, command) {
@@ -229,6 +238,7 @@ var commandConfig = {
       }
 
       var commandOptions = command.getOptionsMap();
+      var force = !!commandOptions['--force'];
       var generalArgs = command.getGeneralArgs();
       if (commandOptions['--rebase']) {
         generalArgs = commandOptions['--rebase'].concat(generalArgs);
@@ -253,8 +263,13 @@ var commandConfig = {
       var firstArg = generalArgs[1];
       // COPY PASTA validation code from fetch. maybe fix this?
       if (firstArg && isColonRefspec(firstArg)) {
+        if (firstArg[0] == '+') {
+          force = true;
+          firstArg = firstArg.substr(1);
+        }
         var refspecParts = firstArg.split(':');
         source = refspecParts[0];
+        assertRefNoModifiers(source);
         destination = validateBranchNameIfNeeded(
           engine,
           crappyUnescape(refspecParts[1])
@@ -264,7 +279,6 @@ var commandConfig = {
         source = firstArg;
         assertIsBranch(engine.origin, source);
         // get o/main locally if main is specified
-        destination = engine.origin.resolveID(source).getPrefixedID();
       } else {
         // can't be detached
         if (engine.getDetachedHead()) {
@@ -277,13 +291,13 @@ var commandConfig = {
         var branch = engine.getOneBeforeCommit('HEAD');
         var branchName = branch.get('id');
         assertBranchIsRemoteTracking(engine, branchName);
-        destination = branch.getRemoteTrackingBranchID();
-        source = destination.replace(ORIGIN_PREFIX, '');
+        source = branch.getRemoteTrackingBranchID().replace(ORIGIN_PREFIX, '');
       }
 
       engine.pull({
         source: source,
         destination: destination,
+        force: force,
         isRebase: !!commandOptions['--rebase']
       });
     }
@@ -375,6 +389,9 @@ var commandConfig = {
 
   fetch: {
     regex: /^git +fetch($|\s)/,
+    options: [
+      '--force',
+    ],
     execute: function(engine, command) {
       if (!engine.hasOrigin()) {
         throw new GitError({
@@ -384,14 +401,21 @@ var commandConfig = {
 
       var source;
       var destination;
+      var commandOptions = command.getOptionsMap();
+      var force = !!commandOptions['--force'];
       var generalArgs = command.getGeneralArgs();
       command.twoArgsForOrigin(generalArgs);
       assertOriginSpecified(generalArgs);
 
       var firstArg = generalArgs[1];
       if (firstArg && isColonRefspec(firstArg)) {
+        if (firstArg[0] == '+') {
+          force = true;
+          firstArg = firstArg.substr(1);
+        }
         var refspecParts = firstArg.split(':');
         source = refspecParts[0];
+        assertRefNoModifiers(source);
         destination = validateBranchNameIfNeeded(
           engine,
           crappyUnescape(refspecParts[1])
@@ -405,7 +429,6 @@ var commandConfig = {
         source = firstArg;
         assertIsBranch(engine.origin, source);
         // get o/main locally if main is specified
-        destination = engine.origin.resolveID(source).getPrefixedID();
       }
       if (source) { // empty string fails this check
         assertIsRef(engine.origin, source);
@@ -413,7 +436,8 @@ var commandConfig = {
 
       engine.fetch({
         source: source,
-        destination: destination
+        destination: destination,
+        force: force
       });
     }
   },
@@ -589,6 +613,47 @@ var commandConfig = {
     }
   },
 
+  mergeMR: {
+    regex: /^git +merge[MP]R($|\s)/,
+    options: ['--delete-after-merge'],
+    execute: function(engine, command) {
+      var generalArgs = command.getGeneralArgs();
+      var commandOptions = command.getOptionsMap();
+      if (!engine.hasOrigin()) {
+        throw new GitError({
+          msg: intl.str('git-error-origin-required'),
+        });
+      }
+
+      command.validateArgBounds(generalArgs, 2, 2);
+
+      var fromBranch = validateOriginBranchName(engine, generalArgs[0]);
+      var intoBranch = validateOriginBranchName(engine, generalArgs[1]);
+
+      var origin = engine.origin;
+
+      origin.checkout(intoBranch);
+      var mergeCommit = origin.merge(fromBranch, { noFF: true });
+
+      origin.animationFactory.genCommitBirthAnimation(
+        origin.animationQueue,
+        mergeCommit,
+        origin.gitVisuals
+      );
+
+      if (!!commandOptions['--delete-after-merge']) {
+        origin.validateAndDeleteBranch(fromBranch);
+      }
+
+      origin.checkout('main');
+
+      origin.animationFactory.playRefreshAnimationAndFinish(
+        origin.gitVisuals,
+        origin.animationQueue
+      );
+    }
+  },
+
   revlist: {
     dontCountForGolf: true,
     displayName: 'rev-list',
@@ -744,7 +809,9 @@ var commandConfig = {
   push: {
     regex: /^git +push($|\s)/,
     options: [
-      '--force'
+      '--force',
+      '--delete',
+      '-d'
     ],
     execute: function(engine, command) {
       if (!engine.hasOrigin()) {
@@ -758,22 +825,59 @@ var commandConfig = {
       var source;
       var sourceObj;
       var commandOptions = command.getOptionsMap();
+      var force = !!commandOptions['--force'];
+      var isDelete = commandOptions['-d'] || commandOptions['--delete'];
 
       // git push is pretty complex in terms of
       // the arguments it wants as well... get ready!
       var generalArgs = command.getGeneralArgs();
+
+      // put the commandOption of delete back in the generalArgs
+      // as it is a flag option
+      if(isDelete) {
+        let option = commandOptions['-d'] || commandOptions['--delete'];
+        generalArgs = option[0] === 'origin'
+        ? option.concat(generalArgs)
+        : generalArgs.concat(option);
+      }
+
       command.twoArgsForOrigin(generalArgs);
       assertOriginSpecified(generalArgs);
-
       var firstArg = generalArgs[1];
+
+      if(isDelete) {
+        if(!firstArg) {
+          throw new GitError({
+            msg: intl.todo(
+              '--delete doesn\'t make sense without any refs'
+            )
+          });
+        }
+
+        if(isColonRefspec(firstArg)) {
+          throw new GitError({
+            msg: intl.todo(
+              '--delete only accepts plain target ref names'
+            )
+          });
+        }
+
+        // transform delete target ref to delete colon refspec
+        firstArg = ":"+firstArg;
+      }
+
       if (firstArg && isColonRefspec(firstArg)) {
+        if (firstArg[0] == '+') {
+          force = true;
+          firstArg = firstArg.substr(1);
+        }
         var refspecParts = firstArg.split(':');
         source = refspecParts[0];
         destination = validateBranchName(engine, refspecParts[1]);
         if (source === "" && !engine.origin.resolveID(destination)) {
           throw new GitError({
             msg: intl.todo(
-              'cannot delete branch ' + options.destination + ' which doesnt exist'
+              'cannot delete branch ' + options.destination + ' which doesn\'t exist'
             )
           });
         }
@@ -811,7 +915,7 @@ var commandConfig = {
         // are always, always strings. very important :D
         destination: destination,
         source: source,
-        force: !!commandOptions['--force']
+        force: force
       });
     }
   },
@@ -889,21 +993,36 @@ var commandConfig = {
     regex: /^git +switch($|\s)/,
     options: [
       '-c',
+      '--create',
+      '-C',
+      '--force-create',
       '-'
     ],
     execute: function(engine, command) {
       var generalArgs = command.getGeneralArgs();
       var commandOptions = command.getOptionsMap();
 
-      var args = null;
-      if (commandOptions['-c']) {
+      let createOption = commandOptions['-c'] ? commandOptions['-c'] : commandOptions['--create'];
+      if (createOption) {
         // the user is really trying to just make a
         // branch and then switch to it. so first:
-        args = commandOptions['-c'].concat(generalArgs);
+        let args = createOption.concat(generalArgs)
         command.twoArgsImpliedHead(args, '-c');
 
-        var validId = engine.validateBranchName(args[0]);
+        let validId = engine.validateBranchName(args[0]);
         engine.branch(validId, args[1]);
+        engine.checkout(validId);
+        return;
+      }
+      let sfc = '-C';
+      let lfc = '--force-create';
+      let fcOption = commandOptions[sfc] ? commandOptions[sfc] : commandOptions[lfc];
+      if (fcOption) {
+        let args = fcOption.concat(generalArgs);
+        command.twoArgsImpliedHead(args, sfc);
+
+        let validId = engine.validateBranchName(args[0]);
+        engine.forceBranch(validId, args[1]);
         engine.checkout(validId);
         return;
       }

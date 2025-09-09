@@ -33,7 +33,7 @@ exports.dialog = {
         '  * Gib einen Hinweis mittels ```define hint``` an, wenn du willst',
         '  * Änder den Namen mittels ```define name```',
         '  * Wenn du magst, erstelle einen schönen Einführungsdialog mit ```edit dialog```',
-        '  * Gib das Kommando ```finish``` ein um deinen Level als JSON auszugeben'
+        '  * Gib das Kommando ```finish``` ein, um dein Level als JSON auszugeben'
       ]
     }
   }],
@@ -184,7 +184,7 @@ exports.dialog = {
         '  * Définissez l\'arbre cible avec ```define goal```. Cela définit aussi la solution',
         '  * Optionnellement, définissez un indice avec ```define hint```',
         '  * Changez le nom avec ```define name```',
-        '  * Optionellement, definissez un joli dialogue de départ avec ```edit dialog```',
+        '  * Optionnellement, définissez un joli dialogue de départ avec ```edit dialog```',
         '  * Entrez la commande ```finish``` pour délivrer votre niveau JSON!'
       ]
     }
@@ -209,6 +209,25 @@ exports.dialog = {
         '*Note: このダイアログは`help builder`で何回でも表示できます！活用してください！*'
       ]
     }
+  }],
+  'ro': [{
+    type: "ModalAlert",
+    options: {
+      markdowns: [
+        "## Bun venit la constructorul de nivele!",
+        "",
+        "Iată pașii principali:",
+        "",
+        "  * Configurați mediul inițial cu comenzi git",
+        "  * Definiți arborele de start cu ```define start```",
+        "  * Introduceți seria de comenzi git care compun soluția (optimă)",
+        "  * Definiți arborele țintă cu ```define goal```. Definirea țintei definește și soluția",
+        "  * Opțional, definiți un indiciu cu ```define hint```",
+        "Modificați numele cu ```define name```",
+        "  * Opțional, puteți defini un dialog de start cu ```edit dialog```",
+        "Introduceți comanda ```finish``` pentru a obține nivelul dvs. în format JSON!",
+      ],
+    },
   }],
   'ru_RU': [{
     type: 'ModalAlert',
@@ -259,7 +278,7 @@ exports.dialog = {
         '  * git 명령어로 초기 환경을 만들어주세요',
         '  * 시작 트리를 ```define start```로 정의하세요',
         '  * (최적화된)정답을 만드는 git 명령어들을 입력하세요',
-        '  * 골 트리를 ```define goal```로 정의해주세요. 골을 정의하면 정답도 같이 정의됩니다',
+        '  * 목표 트리를 ```define goal```로 정의해주세요. 목표를 정의하면 정답도 같이 정의됩니다',
         '  * ```define hint```로 원하면 힌트도 정의해줄수 있습니다',
         '  * 문제의 이름을 ```define name```로 수정하세요',
         '  * 시작 글이 필요하다면 ```edit dialog```로 쓸 수 있습니다',
@@ -281,7 +300,7 @@ exports.dialog = {
         '  * Định nghĩa cây mục tiêu với ```define goal```. Định nghĩa mục tiêu đồng thời cũng xác định đáp án',
         '  * Có thể định nghĩa gợi ý với ```define hint```',
         '  * Chỉnh sửa tên với ```define name```',
-        '  * Có thể định nghĩa hội thoại bắt đầu với ```edit dialog```',
+        '  * Có thể định nghĩa hộp thoại bắt đầu với ```edit dialog```',
         '  * Nhập lệnh ```finish``` xuất cấp độ của bạn dưới dạng JSON!'
       ]
     }
@@ -364,5 +383,23 @@ exports.dialog = {
       },
     },
   ],
+  'tr_TR': [{
+    type: 'ModalAlert',
+    options: {
+      markdowns: [
+        '## Level oluşturucusuna hoş geldiniz!',
+        '',
+        'İşte ana adımlar:',
+        '',
+        '  * Git komutlarıyla başlangıç ortamını ayarlayın',
+        '  * Başlangıç ağacını ```define start``` ile tanımlayın',
+        '  * (İdeal) çözümü oluşturan git komutlarını girin',
+        '  * Hedef ağacını ```define goal``` ile tanımlayın. Hedefi tanımlamak aynı zamanda çözümü tanımlar',
+        '  * İsteğe bağlı olarak ipucu ekleyin ```define hint```',
+        '  * İsmi düzenleyin ```define name```',
+        '  * İsteğe bağlı olarak hoş bir başlangıç diyalogu tanımlayın ```edit dialog```',
+        '  * Level JSON\'unuzu çıkarmak için ```finish``` komutunu girin!'
+      ]
+    }
+  }],
 };
-

@@ -62,11 +62,7 @@ var init = function() {
     wait: true
   });
 
-  LocaleStore.subscribe(function() {
-    if (LocaleStore.getLocale() !== LocaleStore.getDefaultLocale()) {
-      intlRefresh();
-    }
-  });
+  LocaleStore.subscribe(intlRefresh);
   events.on('vcsModeChange', vcsModeRefresh);
 
   initRootEvents(eventBaton);
@@ -237,6 +233,10 @@ var initDemo = function(sandbox) {
       'levels'
     ];
     commands = commands.join(';#').split('#'); // hax
+  } else if (params.hasOwnProperty('level')) {
+    commands = [
+      'level ' + unescape(params.level),
+    ];
   } else if (params.gist_level_id) {
     $.ajax({
       url: 'https://api.github.com/gists/' + params.gist_level_id,

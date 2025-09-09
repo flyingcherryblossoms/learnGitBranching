@@ -480,6 +480,10 @@ div.ui-draggable div.controls div.box.flex1 div {
   cursor: pointer;
 }
 
+div.modalTerminal div.close {
+  cursor: pointer !important;
+}
+
 div.controls div.box.flex1 div.close {
   background-color: #fb625f;
 }
@@ -674,7 +678,7 @@ li.rebaseEntry,
   bottom: 0px;
   right: 0px;
   background: #424242;
-  padding: 4px 10px;
+  padding: 12px 12px;
   border-radius: 5px 0 0 0;
   border: 2px solid #EFEDEE;
   border-bottom: 0;
@@ -1006,6 +1010,25 @@ a.levelIcon.solved:active {
   background: #5edb15;
 }
 
+a.levelIcon.best {
+  background: -webkit-linear-gradient(top, #FFD700, #FFA500);
+  background: -moz-linear-gradient(top, #FFD700, #FFA500);
+  background: -o-linear-gradient(top, #FFD700, #FFA500);
+  background: -ms-linear-gradient(top, #FFD700, #FFA500);
+  background: linear-gradient(top, #FFD700, #FFA500);
+  border-top: 1px solid #FFE750;
+}
+
+a.levelIcon.best:hover {
+  border-top-color: #FFD700;
+  background: #FFD700;
+}
+
+a.levelIcon.best:active {
+  border-top-color: #FFA500;
+  background: #FFA500;
+}
+
 a.levelIcon div.index {
   font-weight: 400;
   text-shadow: 1px 1px 2px #CCC, 0 2px 0 #C9C9C9;
@@ -1014,21 +1037,22 @@ a.levelIcon div.index {
   -webkit-text-stroke: 1px #111;
 }
 
+/* Icon states */
 a.levelIcon div.index i {
   display: none;
-}
-
-a.levelIcon.solved div.index i {
-  display: block;
   color: white;
-  -webkit-text-stroke: 0;
-  text-shadow: none;
   font-size: 2em;
+  -webkit-text-stroke: 0;
 }
 
-a.levelIcon.solved div.index div.indexNum {
-  display: none;
-}
+/* Show appropriate icon based on state */
+a.levelIcon.solved .icon-ok-circle { display: block; }
+a.levelIcon.best .icon-ok-circle { display: none; }
+a.levelIcon.best .icon-star { display: block; }
+
+/* Hide number when icons are shown */
+a.levelIcon.solved div.index div.indexNum,
+a.levelIcon.best div.index div.indexNum { display: none; }
 
 /* MultiView Builder */
 .multiViewBuilder div.view {
@@ -1146,6 +1170,28 @@ div.gitDemonstrationView {
   opacity: 0;
 }
 
+.gitDemonstrationView p[target="reset"] {
+  display: none;
+  opacity: 0.0;
+}
+
+.gitDemonstrationView p.uiButton {
+  margin: 0.5em 0;
+}
+
+.gitDemonstrationView.demonstrated p[target="reset"] {
+  display: block;
+  margin: 0.5em 0;
+  opacity: 0.3;
+  font-size: 8pt;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.gitDemonstrationView  div.afterText p {
+  margin-top: 0.1em;
+}
+
 .gitDemonstrationView.demonstrated div.afterText {
   opacity: 1;
 }
@@ -1155,7 +1201,10 @@ div.gitDemonstrationView {
 }
 
 .gitDemonstrationView.demonstrated p.uiButton {
-  opacity: 0.4;
+  opacity: 0.6;
+  margin-bottom: 0.1em;
+  cursor: auto;
+  pointer-events: none;
 }
 
 /* LeftRightView */

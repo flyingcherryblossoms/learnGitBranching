@@ -11,25 +11,29 @@ exports.level = {
     "en_US": "Branch Spaghetti",
     "fr_FR": "Branche spaghetti",
     "de_DE": "Branch-Spaghetti",
-    "es_AR": "Enslada de branches",
+    "es_AR": "Ensalada de branches",
+    "es_MX": "Espagueti de ramas",
     "es_ES": "Ensalada de ramas",
     "pt_BR": "Espaguete de ramos",
     "gl": "Espaguete de ramas",
     "ja": "ブランチスパゲッティ",
     "zh_CN": "纠缠不清的分支",
     "zh_TW": "branch 漿糊",
+    "ro": "Ramuri Spaghetti",
     "ru_RU": "Спутанные ветки",
     "uk": "Макарони з гілок",
     "vi": "Nhánh rối như canh hẹ",
     "sl_SI": "Špageti iz Branchev",
     "it_IT": "Rami spaghettificati",
     "pl": "Spaghetti gałęzi",
+    "tr_TR": "Branch Spagettisi"
   },
   "hint": {
     "en_US": "Make sure to do everything in the proper order! Branch one first, then two, then three",
     "fr_FR": "Faites attention à tout faire dans le bon ordre ! La première branche d'abord, puis la seconde, puis la troisième",
     "de_DE": "Stelle sicher, dass du alles in der richtigen Reihenfolge machst! Branche erst one, dann two, dann three.",
     "es_AR": "¡Asegurate de hacer las cosas en el orden correcto! Brancheá `one` primero, después `two`, y después `three`.",
+    "es_MX": "¡Asegúrate de hacer las cosas en el orden correcto! Primero la rama uno, después la dos, y después la tres.",
     "es_ES": "¡Asegúrate de hacer las cosas en el orden correcto! Crea primero la rama `one`, después `two`, y después `three`.",
     "pt_BR": "Certifique-se de fazer tudo na ordem correta! Crie o ramo `one` primeiro, depois `two`, depois `three`.",
     "gl": "¡Afiánzate de facer as cousas no orde correcto! Crea ramas `one` de primeiras, e logo `two` e `three`.",
@@ -37,12 +41,14 @@ exports.level = {
     "ko": "이 문제를 해결하는 방법은 여러가지가 있습니다! 체리픽(cherry-pick)이 가장 쉽지만 오래걸리는 방법이고, 리베이스(rebase -i)가 빠른 방법입니다",
     "zh_CN": "确保你是按照正确的顺序来操作！先操作分支 `one`, 然后 `two`, 最后才是 `three`",
     "zh_TW": "確認你是按照正確的順序來操作！先操作 branch  `one`, 然後 `two`, 最後才是 `three`",
+    "ro": "Asigură-te că faci totul în ordinea corectă! Ramura `one` mai întâi, apoi `two`, și apoi `three`",
     "ru_RU": "Убедись, что у нас всё по порядку! Сначала ветка `one`, потом `two` и только потом `three`",
     "uk": "Переконайся, що все йде за порядком! Спершу гілка `one`, потім `two`, і тільки потім `three`",
     "vi": "Hãy chắc chắn rằng bạn làm đúng thứ tự! Nhánh `one` trước, rồi `two`, rồi mới đến `three`",
     "sl_SI": "Glej da boš vse opravil v pravilnem vrstnem redu! Najprej branch ena, nato pa dva in tri.",
     "it_IT": "Assicurati di fare tutto nel giusto ordine! Prima il primo ramo, poi il secondo, poi il terzo",
     "pl": "Upewnij się, że robisz wszystko w odpowiedniej kolejności! Gałąź pierwsza, potem druga, potem trzecia.",
+    "tr_TR": "Her şeyi doğru sırada yaptığından emin ol! Önce ilk branch (one), ardından ikinci branch (two), ardından üçüncü branch (three)"
   },
   "startDialog": {
     "en_US": {
@@ -100,6 +106,26 @@ exports.level = {
               "La rama `one` necesita reordenarse, y eliminar `C5`. `two` necesita sólo reordenamiento, y `three` ¡sólo necesita un commit!",
               "",
               "Te vamos a dejar darte cuenta cómo resolver este -- asegurate de mirar la solución, después, usando `show solution`. "
+            ]
+          }
+        }
+      ]
+    },
+    "es_MX": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Espagueti de ramas",
+              "",
+              "¡Oh vaya! Tenemos un _pequeño_ objetivo al que llegar en este nivel.",
+              "",
+              "La rama `main` se encuentra algunos commits por delante de las ramas `one`, `two` y `three`. Por alguna razón, necesitamos actualizar esas tres ramas con versiones modificadas de los últimos commits de main.",
+              "",
+              "La rama `one` necesita esos commits reordenados, y eliminar/excluir a `C5`. La rama `two` sólo necesita reordenarlos, y `three` ¡sólo necesita avanzar un commit!",
+              "",
+              "Vamos a dejar que averigues cómo resolver este -- asegúrate de revisar nuestra solución después, usando `show solution`. "
             ]
           }
         }
@@ -265,6 +291,26 @@ exports.level = {
         }
       ]
     },
+    "ro": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Ramuri Spaghetti",
+              "",
+              "WOAHHHhhh! Avem un obiectiv destul de mare de atins în acest nivel.",
+              "",
+              "Aici avem `main` care este cu câteva commit-uri înaintea ramurilor `one`, `two` și `three`. Dintr-un motiv oarecare, trebuie să actualizăm aceste trei ramuri cu versiuni modificate ale ultimelor commit-uri de pe main.",
+              "",
+              "Ramura `one` are nevoie de o reordonare a acelor commit-uri și de excluderea/ștergerea lui `C5`. Ramura `two` are nevoie doar de o reordonare a commit-urilor, iar `three` are nevoie doar de un singur commit transferat!",
+              "",
+              "O să te lăsăm să descoperi cum să rezolvi asta -- asigură-te că verifici soluția noastră ulterior cu `show solution`. "
+            ]
+          }
+        }
+      ]
+    },
     "ru_RU": {
       "childViews": [
         {
@@ -315,16 +361,17 @@ exports.level = {
               "",
               "Chààà, anh bạn! Thử thách lần này hơi khoai đây.",
               "",
-              "Hiện tại thì nhánh `main` đang có nhiều commit hơn các nhánh `one`, `two` và `three`. Vì một lý do nào đó, ta cần cập nhật những commit trên nhánh `main` lên các nhánh còn lại kèm với một vài điều chỉnh .",
+              "Hiện tại thì nhánh `main` đang có trước vài commit so với các nhánh `one`, `two` và `three`. Vì một lý do nào đó, ta cần cập nhật những commit trên nhánh `main` lên các nhánh còn lại kèm với một vài điều chỉnh.",
               "",
-              "Nhánh `one` thì cần sắp xếp lại và xóa commit `C5`, trong khi đó nhánh `two` thì đơn giản sắp xếp, còn `three` thì chỉ cần một commit!",
+              "Nhánh `one` cần sắp xếp lại commit và xóa commit `C5`, nhánh `two` chỉ cần sắp xếp commit, còn `three` thì cần chuyển đi một commit!",
               "",
               "Cố gắng động não tìm ra cách đi nhé -- khi bạn làm xong thì nhớ so sánh với đáp án của chúng tôi bằng lệnh `show solution`. "
             ]
           }
         }
       ]
-    }, "sl_SI": {
+    },
+    "sl_SI": {
       "childViews": [
         {
           "type": "ModalAlert",
@@ -384,5 +431,25 @@ exports.level = {
         }
       ]
     },
+    "tr_TR": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Branch Spagettisi",
+              "",
+              "Vay canına! Bu bölümde ulaşmamız gereken hedef oldukça büyük.",
+              "",
+              "Burada `main`, `one` `two` ve `three` dallarından birkaç commit önde. Herhangi bir nedenden ötürü, bu diğer üç dalı main'deki son birkaç commit'in değiştirilmiş versiyonlarıyla güncellememiz gerekiyor.",
+              "",
+              "`one` branchi bu commitlerin yeniden düzenlenmesine ve an `C5`'in hariç tutulması/bırakılmasına ihtiyaç duyuyor. `two` branchi sadece commitlerin yeniden sıralanmasına ihtiyaç duyuyuor, ve `three` için sadece bir commit transferi gerekiyor!",
+              "",
+              "Bunu nasıl çözeceğinizi size anlatacağız -- daha sonrasında bizim çözümümüzü `show solution` ile kontrol etmeyi unutmayın."
+            ]
+          }
+        }
+      ]
+    }
   }
 };

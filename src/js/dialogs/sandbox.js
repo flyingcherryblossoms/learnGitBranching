@@ -1,3 +1,5 @@
+const { Branch } = require("../git");
+
 exports.dialog = {
   'en_US': [{
     type: 'ModalAlert',
@@ -333,7 +335,7 @@ exports.dialog = {
       markdowns: [
         '## Git-Kommandos',
         '',
-        'Dir steht eine große Zahl von Git-Befehlen im Sandkasten-Modus zur Verfügung. Unter anderem',
+        'Dir steht eine große Zahl von Git-Befehlen im Sandkasten-Modus zur Verfügung. Unter anderem:',
         '',
         ' * commit',
         ' * branch',
@@ -357,7 +359,7 @@ exports.dialog = {
         '',
         'Um alle Kommandos zu sehen, gib `show commands` ein. Darunter gibt\'s kleine Schätze wie `undo` und `reset`.',
         '',
-        'Für\'s Erste lass uns mit `levels` anfangen ...'
+        'Lass uns für\'s Erste mit `levels` anfangen ...'
       ]
     }
   }],
@@ -498,16 +500,28 @@ exports.dialog = {
     type: 'ModalAlert',
     options: {
       markdowns: [
-        '## Git 브랜치 배우기를 시작합니다!',
+        '## Git 브랜치 배우기에 어서오세요!',
         '',
-        '이 애플리케이션은 git을 쓸 때 필요한 브랜치에 대한 개념을',
-        '탄탄히 잡게끔 도와드리기 위해 만들었습니다. 재밌게 사용해주시기를',
-        '바라며, 무언가를 배워가신다면 더 기쁘겠습니다!',
+        'Git을 배우고 싶으신가요? 잘 찾아오셨습니다!',
+        '"Learn Git Branching"은 웹에서 Git을 배울 수 있는 가장',
+        '시각적이고 인터랙티브한 방법입니다.',
+        '',
+        '당신은 강력한 기능들에 대한 단계별 데모를 통해 흥미진진한 레벨들에 도전하게 되며,',
+        '이 대화상자가 끝나면 저희가 제공하는 다양한 레벨을 볼 수 있습니다.',
+        '초보자라면 첫 번째 레벨부터 시작하세요.',
+        '이미 Git의 기본 사항을 알고 있다면 더 어려운 레벨에 도전해보세요.',
+        '',
+        '터미널에서 `show commands`로 사용 가능한 모든 명령어를 볼 수 있습니다.',
+        '',
+        '[안내1] 데모링크로 바로가기 [이동](https://pcottle.github.io/learnGitBranching/?demo&locale=ko)',
+        '',
+        '[안내2] GitHub는 편향된 용어에서 벗어나기 위해',
+        '기본 브랜치의 이름을 `master` 대신 `main`으로 명명하기 시작했습니다.',
+        '이러한 업계 전반의 움직임에 따라, 저희도 `master` 대신 `main`을 사용하도록',
+        '`Git 브랜치 배우기` 강의를 업데이트했습니다.',
+        '해당 사항이 반영되지 않은 오류가 발견될 시 언제든지 PR을 제출(또는 이슈를 오픈)해 주세요.[참고](https://github.com/github/renaming)',
         '',
         '이 애플리케이션은 [Peter Cottle](https://github.io/pcottle)님의 [LearnGitBranching](https://pcottle.github.io/learnGitBranching/)를 번역한 것입니다.',
-        '아래 데모를 먼저 보셔도 좋습니다.',
-        '',
-        '<https://pcottle.github.io/learnGitBranching/?demo&locale=ko>'
       ]
     }
   }, {
@@ -534,9 +548,9 @@ exports.dialog = {
       markdowns: [
         '## 공유해주세요!',
         '',
-        '`export tree` 와 `import tree`로 여러분의 친구들에게 트리를 공유해주세요',
+        '`export tree` 또는 `import tree` 명령어로 git의 트리 구조를 친구들에게 공유할 수 있습니다.',
         '',
-        '훌륭한 학습 자료가 있으신가요? `build level`로 레벨을 만들어 보시거나, 친구의 레벨을 `import level`로 가져와서 실험해보세요',
+        '훌륭한 학습 자료가 있으신가요? `build level`로 레벨을 만들어 보시거나, 친구의 레벨을 `import level`로 가져와서 도전해보세요',
         '',
         '이제 레슨을 시작해봅시다...'
       ]
@@ -568,25 +582,43 @@ exports.dialog = {
     type: 'ModalAlert',
     options: {
       markdowns: [
-        '## Commandes Git',
+        '## Quelques commandes utiles `Learn Git Branching`',
         '',
-        'Il existe une large variété de commandes git disponibles dans le mode bac à sable. Sont incluses :',
+        'À tout moment, vous pouvez exécuter les commandes suivantes dans le terminal :',
         '',
-        ' * commit',
-        ' * branch',
-        ' * checkout',
-        ' * cherry-pick',
-        ' * reset',
-        ' * revert',
-        ' * rebase',
-        ' * merge'
+        ' * `help` -> Affiches les pages de tutoriel de l\'application',
+        ' * `help levels` -> Affiche les consignes du niveau actuel',
+        ' * `levels` -> Affiche la liste des niveaux',
+        ' * `reset` -> Réinitialise le niveau actuel',
+        ' * `show commands` -> Affiche toutes les commandes disponibles',
+        ' * `show goal` -> Affiche l\'objectif du niveau actuel',
+        ' * `show solution` -> Affiche la solution du niveau actuel'
       ]
     }
   }, {
     type: 'ModalAlert',
     options: {
       markdowns: [
-        '## Partager, c\'est se soucier !',
+        '## D\'autres commandes utiles `Git`',
+        '',
+        'Il existe une large variété de commandes git disponibles dans le mode bac à sable, notamment :',
+        '',
+        ' * `branch`',
+        ' * `checkout` (deprecated, utilisez `switch`)',
+        ' * `cherry-pick`',
+        ' * `commit`',
+        ' * `merge`',
+        ' * `rebase`',
+        ' * `reset`',
+        ' * `revert`',
+        ' * `switch`',
+      ]
+    }
+  }, {
+    type: 'ModalAlert',
+    options: {
+      markdowns: [
+        '## Partager, c\'est collaborer !',
         '',
         'Partagez des arbres avec vos amis via `export tree` et `import tree`',
         '',
@@ -597,6 +629,35 @@ exports.dialog = {
         'Mais tout de suite commencez sur les `levels`…'
       ]
     }
+  }],
+  'ro': [{
+    type: "ModalAlert",
+    options: {
+      markdowns: [
+        "## Bine ați venit la Learn Git Branching",
+        "",
+        "Vrei să înveți Git? Atunci ai ajuns în locul potrivit! ",
+        '"Learn Git Branching" este cea mai vizuală și interactivă modalitate de a învăța Git ',
+        "pe web; vei fi provocat cu niveluri interesante, vei primi ",
+        "demonstrații pas cu pas ale funcțiilor puternice ale Git-ului și poate chiar te vei distra puțin pe parcurs.",
+        "",
+        "După acest dialog, vei vedea o varietate de niveluri pe care le avem de oferit. Dacă ești începător, ",
+        "poți începe cu primul nivel. Dacă deja cunoști câteva noțiuni de bază despre Git, ",
+        "încercă unele dintre nivelurile noastre mai provocatoare de la final.",
+        "",
+        "Poți vedea toate comenzile disponibile cu `show commands` în terminal.",
+        "",
+        "P.S. Vrei să ajungi direct în sandbox data viitoare?",
+        "Încearcă ",
+        "[acest link special](https://pcottle.github.io/learnGitBranching/?NODEMO)",
+        "",
+        "P.S.S. GitHub a început să numească ramura implicită `main` în loc de `master` ",
+        "pentru a migra de la terminologia învechită [(mai multe detalii disponibile aici)](https://github.com/github/renaming).",
+        "În conformitate cu acest demers la nivel de industrie, am actualizat și noi „Learn Git Branching” pentru ",
+        "a utiliza `main` în loc de `master` în lecțiile noastre. Această redenumire ar trebui să fie destul de consistentă deja, ",
+        "însă dacă observi vreo eroare, nu ezita să trimiți un PR (sau să deschizi o problemă).",
+      ],
+    },
   }],
   'ru_RU': [{
     type: 'ModalAlert',
@@ -684,17 +745,23 @@ exports.dialog = {
         '',
         'Bạn có hứng thú học Git? Bạn đến đúng nơi rồi đấy! ',
         '"Học Nhánh Git" là cách trực quan và hiệu quả nhất để học Git trên web; ',
-        'thông qua một loạt các thử thách cấp độ thú vị, bạn sẽ từng bước tìm hiểu sức mạnh của git',
+        'thông qua một loạt các thử thách cấp độ thú vị, bạn sẽ từng bước tìm hiểu sức mạnh của Git.',
         '',
-        'Sau khi hội thoại này đóng lại, bạn sẽ thấy nhiều cấp độ mà chúng tôi cung cấp. ',
-        'Nếu bạn là người mới thì hãy bắt đầu từ bài đầu tiên. Nếu bạn đã có hiểu biết cơ bản về git, ',
+        'Sau khi hộp thoại này đóng lại, bạn sẽ thấy nhiều cấp độ mà chúng tôi cung cấp. ',
+        'Nếu bạn là người mới thì hãy bắt đầu từ bài đầu tiên. Nếu bạn đã có hiểu biết cơ bản về Git, ',
         'hãy thử những bài mang tính thách thức hơn phía sau.',
         '',
-        'Bạn có thể dùng lệnh `show commands` để xem tất cả các lệnh hiện hữu.',
+        'Bạn có thể dùng lệnh `show commands` để xem tất cả các lệnh được hỗ trợ.',
         '',
-        'Ghi chú: Nếu muốn trực tiếp vào hộp cát ở lần sau?',
+        'Ghi chú: Nếu muốn trực tiếp vào hộp cát (sandbox) ở lần sau?',
         'Hãy dùng',
-        '[đường link đặc biệt này của chúng tôi](https://pcottle.github.io/learnGitBranching/?locale=vi&NODEMO)'
+        '[đường link đặc biệt này của chúng tôi](https://pcottle.github.io/learnGitBranching/?locale=vi&NODEMO)',
+        '',
+        'Tái bút: GitHub đã đổi tên cho nhánh mặc định là `main` thay vì `master` ',
+        'nhằm tránh dùng thuật ngữ có xu hướng thiên vị [(xem chi tiết tại đây)](https://github.com/github/renaming). ',
+        'Để bắt kịp xu hướng công nghệ này, chúng tôi cũng đã cập nhật "Học Nhánh Git" sử ',
+        'dụng `main` thay thế cho `master` trong các bài học. Việc đổi tên được thực hiện khá nhất quán cho đến ',
+        'thời điểm hiện tại, nhưng nếu bạn phát hiện bất kỳ lỗi nào, đừng ngần ngại mà gửi một pull request (PR), hoặc tạo một vấn đề (New issue).'
       ]
     }
   }],
@@ -809,4 +876,34 @@ exports.dialog = {
       },
     },
   ],
+  'tr_TR': [{
+    type: 'ModalAlert',
+    options: {
+      markdowns: [
+        '## Learn Git Branching\'e hoşgeldiniz.',
+        '',
+        'Git öğrenmeye ilgi duyuyor musunuz? O zaman doğru yerdesiniz!',
+        '"Learn Git Branching," Git\'i öğrenmenin en görsel ve etkileşimli yoludur.',
+        'web üzerinde; sizi heyecan verici seviyelerle zorlayacak, güçlü özelliklerin adım adım gösterimlerini sunacak',
+        've belki de eğlenceli vakit geçirmenizi sağlayacaktır.',
+        '',
+        'Bu iletişim kutusunu geçtikten sonra sunduğumuz çeşitli seviyeleri göreceksiniz. Eğer yeni başlayan biriyseniz, ',
+        'sadece ilk seviyeye başlayabilirsiniz. Eğer zaten Git temellerini biliyorsanız, ',
+        'daha sonraki daha zorlu seviyeleri deneyebilirsiniz.',
+        '',
+        'Terminalde `show commands` ile mevcut tüm komutları görebilirsiniz.',
+        '',
+        'Not: Bir sonraki seferde doğrudan bir deneme ortamına gitmek mi istiyorsunuz\?',
+        'Denemek için bu özel bağlantıyı kullanın:  ',
+        '[özel bağlantı](https://pcottle.github.io/learnGitBranching/?NODEMO)',
+        '',
+        'Not: GitHub, önyargılı terimlerden uzaklaşmak için varsayılan Branch ismini `master` yerine `main`  ',
+        'olarak adlandırmaya başladı [(daha fazla detay için tıklayın)](https://github.com/github/renaming). ',
+        'Biz de sektör genelindeki harekete uygun olarak, "Learn Git Branching" ',
+        'derslerimizde de `master` yerine `main` kullanımını güncelledik. Bu adlandırmanın ',
+        'şu anda oldukça tutarlı olması gerekiyor, ancak herhangi bir hata fark ederseniz,',
+        'lütfen bir PR (veya issue) göndermekten çekinmeyin.'
+      ]
+    }
+  }],
 };

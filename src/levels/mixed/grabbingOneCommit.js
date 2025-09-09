@@ -26,18 +26,22 @@ exports.level = {
     "ja": "一つのコミットのみを取得",
     "zh_CN": "只取一个提交记录",
     "zh_TW": "只取一個 commit",
+    "ro": "Alegem doar un singur commit",
     "ru_RU": "Выберем один коммит.",
     "uk": "Вибираємо всього один коміт",
     "vi": "Chỉ lấy 1 commit",
     "sl_SI": "Izbiranje Samo Enega Commita",
     "it_IT": "Prendi solo 1 Commit",
     "pl": "Wzięcie tylko 1 commita",
+    "ta_IN": "ஒரே ஒரு commit மட்டும் எடுப்பது",
+    "tr_TR": "Sadece 1 commit'i yakalamak"
   },
   "hint": {
     "en_US": "Remember, interactive rebase or cherry-pick is your friend here",
     "de_DE": "Vergiss nicht: Hier kommst du mit interaktivem Rebase oder Cherry-Picking weiter",
     "fr_FR": "Souvenez-vous, les rebases interactifs ou cherry-pick sont vos amis ici.",
     "es_AR": "Acordate, el rebase interactivo o cherry-pick son tus amigos acá",
+    "es_MX": "Recuerda, el rebase interactivo o el cherry-pick son tus aliados aquí",
     "es_ES": "Recuerda, el rebase interactivo y el cherry-pick son tus amigos",
     "pt_BR": "Lembre-se, o rebase interativo ou o cherry-pick são seus amigos aqui",
     "gl": "Recorda, o rebase interativo ou cherry-pick é un dos teus colegas aquí",
@@ -45,12 +49,15 @@ exports.level = {
     "ko": "대화식 리베이스(rebase -i)나 or 체리픽(cherry-pick)을 사용하세요",
     "zh_CN": "你有两个朋友，cherry-pick 和 rebase -i",
     "zh_TW": "記住，使用互動式的 rebase 或者 cherry-pick 會很有幫助",
+    "ro": "Nu uita, rebase interactiv sau cherry-pick sunt prietenii tăi aici",
     "ru_RU": "Не забывай, что интерактивный rebase и cherry-pick – это твои друзья!",
     "uk": "Не забувай, що інтерактивний rebase та cherry-pick -- це твої друзі!",
-    "vi": "Hãy nhớ 2 anh bạn tương tác rebase và cherry-pick!",
+    "vi": "Hãy nhớ 2 anh bạn tương tác rebase và cherry-pick",
     "sl_SI": "Pomni, interaktivni rebase ali cherry-pick sta tu tvoja prijatelja.",
     "it_IT": "Ricorda, rebase interattivo o cherry-pick sono tuoi amici",
     "pl": "Pamiętaj, że znasz już interaktywny rebase oraz cherry-pick",
+    "ta_IN": "மறவாதீர்கள், interactive rebase அல்லது cherry-pick இங்கே உங்கள் நண்பர்",
+    "tr_TR": "Unutmayın interactive rebase ve cherry-pick buradaki en iyi dostlarınız."
   },
   "startDialog": {
     "en_US": {
@@ -362,7 +369,6 @@ exports.level = {
         }
       ]
     },
-    // INTL out of sync :(
     "ja": {
       "childViews": [
         {
@@ -523,6 +529,45 @@ exports.level = {
         }
       ]
     },
+    "ro": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Commit-uri salvate local",
+              "",
+              "Iată o situație de dezvoltare care apare frecvent: încerc să găsesc un bug, dar este destul de greu de găsit. Pentru a mă ajuta în munca mea de detectiv, adaug câteva comenzi de debug și câteva instrucțiuni de printare.",
+              "",
+              "Toate aceste comenzi de depanare și instrucțiuni de printare sunt în propriile lor commit-uri. În cele din urmă, găsesc bug-ul, îl repar și mă bucur!",
+              "",
+              "Singura problemă este că acum trebuie să aduc `bugFix` înapoi în ramura `main`. Dacă pur și simplu fac un fast-forward la `main`, atunci `main` va primi toate instrucțiunile mele de depanare, ceea ce nu este de dorit. La sigur trebuie să existe o altă modalitate..."
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Trebuie să spunem lui git să copie doar unul dintre commit-uri. Aceasta este exact ca nivelurile anterioare de mutare a muncii -- putem folosi aceleași comenzi:",
+              "",
+              "* `git rebase -i`",
+              "* `git cherry-pick`",
+              "",
+              "Pentru a atinge acest obiectiv."
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Acesta este un nivel mai avansat, așa că lăsăm la discreția ta decizia de a alege ce comandă vrei să folosești, dar pentru a finaliza nivelul, asigură-te că `main` primește commit-ul la care se referă `bugFix`."
+            ]
+          }
+        }
+      ]
+    },
     "ru_RU": {
       "childViews": [
         {
@@ -554,7 +599,7 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "В этом уровне тебе решать, какую команду использовать, но чтобы закончить уровень, убедись, что в мастер попал коммит, на который ссылается `bugFix`."
+              "В этом уровне тебе решать, какую команду использовать, но чтобы закончить уровень, убедись, что в ветку `main` попал коммит, на который ссылается `bugFix`."
             ]
           }
         }
@@ -605,13 +650,13 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "## Commit xếp chồng tại địa phương",
+              "## Commit xếp chồng cục bộ",
               "",
-              "Có tình huống thế này thường hay xảy ra trong quá trình phát triển: Tôi dang cố dò lỗi nhưng mà nó lại khá là trúc trắc. Để hỗ trợ cho việc này, thêm vào vài dòng lệnh gỡ lỗi và lệnh in.",
+              "Có tình huống thế này thường hay xảy ra trong quá trình phát triển: Tôi đang cố dò lỗi nhưng mà nó lại khá khó tìm. Để hỗ trợ cho việc này, tôi thêm vào vài dòng lệnh gỡ lỗi và lệnh in.",
               "",
               "Mấy lệnh gỡ lỗi và in này nằm yên trong commit của chúng. Cuối cùng thì tôi cũng tìm ra lỗi, gỡ xong, ngon rồi!",
               "",
-              "Bây giờ thì lại phải đưa `bugFix` trở về nhánh `main`. Nếu mà đơn giản dùng fast-forwarded lên `main`, thì `main` lại có tất cả các lệnh gỡ lỗi kia(chẳng muốn chút nào). Phải có cách khác chứ nhỉ..."
+              "Bây giờ thì lại phải đưa `bugFix` trở về nhánh `main`. Nếu mà đơn giản dùng fast-forwarded lên `main`, thì `main` lại có tất cả các lệnh gỡ lỗi kia, chẳng muốn chút nào. Phải có cách khác chứ nhỉ..."
             ]
           }
         },
@@ -619,7 +664,7 @@ exports.level = {
           "type": "ModalAlert",
           "options": {
             "markdowns": [
-              "Ta cần phải bảo git chỉ sao chép 1 commit thôi. Điều này giống với cấp độ trước về điều chỉnh vị trí -- ta có thể dùng các câu lệnh tương tự:",
+              "Ta cần phải bảo Git chỉ sao chép 1 commit thôi. Điều này giống với cấp độ trước về điều chỉnh vị trí -- ta có thể dùng các câu lệnh tương tự:",
               "",
               "* `git rebase -i`",
               "* `git cherry-pick`",
@@ -717,43 +762,121 @@ exports.level = {
       ]
     },
     "it_IT": {
-      childViews: [
+      "childViews": [
         {
-          type: "ModalAlert",
-          options: {
-            markdowns: [
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
               "## Commit impilati localmente",
               "",
               "Ecco una situazione che accade spesso in fase di sviluppo: Sto cercando di scovare un bug. Per aiutarmi nel mio lavoro di detective, inserisco alcuni comandi per il debug e alcune print per fare stampe.",
               "",
               "Questi comandi aggiunti per il debug vengono salvati con un commit loro dedicato. Finalmente riesco a beccare il bug, sistemo il tutto, e brindo!",
               "",
-              "Ora l'unico problema è che devo salvare il lavoro di `bugFix` nel ramo `main`. Se eseguo un semplice fast-forwarded `main`, allora il `main` andrebbe a prendere anche tutto ciò che è stato aggiunto per il debug. Se solo ci fosse un altro modo...",
-            ],
-          },
+              "Ora l'unico problema è che devo salvare il lavoro di `bugFix` nel ramo `main`. Se eseguo un semplice fast-forwarded `main`, allora il `main` andrebbe a prendere anche tutto ciò che è stato aggiunto per il debug. Se solo ci fosse un altro modo..."
+            ]
+          }
         },
         {
-          type: "ModalAlert",
-          options: {
-            markdowns: [
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
               "Dobbiamo dire a Git di fare la copia di un solo commit. Questo assomiglia a quanto visto in precedenza -- possiamo riusare gli stessi comandi:",
               "",
               "* `git rebase -i`",
               "* `git cherry-pick`",
               "",
-              "Per raggiungere l'obiettivo.",
-            ],
-          },
+              "Per raggiungere l'obiettivo."
+            ]
+          }
         },
         {
-          type: "ModalAlert",
-          options: {
-            markdowns: [
-              "Questo è un livello più avanzato, lascerò a te la libertà di decidere quale comando usare, ma per concludere il livello, assicurati che `main` riceva il commit puntato da `bugFix`.",
-            ],
-          },
-        },
-      ],
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Questo è un livello più avanzato, lascerò a te la libertà di decidere quale comando usare, ma per concludere il livello, assicurati che `main` riceva il commit puntato da `bugFix`."
+            ]
+          }
+        }
+      ]
     },
+    "ta_IN": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## உள்ளூரியாக அடுக்கப்பட்ட commits",
+              "",
+              "இங்கே அடிக்கடி நிகழும் ஒரு மேம்பாட்டு நிலைமை: நான் ஒரு பிழையை கண்டறிய முயற்சி செய்கிறேன், ஆனால் அது மிகவும் பிடிக்க முடியாதது. எனது விசாரணை பணிக்கு உதவ, நான் சில டிபக் கமாண்டுகளை மற்றும் சில பிரிண்ட் அறிக்கைகளை சேர்க்கிறேன்.",
+              "",
+              "இந்த அனைத்து டிபக்/பிரிண்ட் அறிக்கைகளும் தனிப்பட்ட commitகளில் உள்ளன. இறுதியாக, நான் பிழையை கண்டறிந்து சரிசெய்து மகிழ்ச்சியடைந்தேன்!",
+              "",
+              "ஒரே பிரச்சனை என்னவென்றால், நான் என் `bugFix` ஐ `main` கிளைக்கு திரும்பப் போட வேண்டும். நான் வெறும் fast-forward செய்வதாக இருந்தால், `main` கிளை அனைத்தும் எனது டிபக் அறிக்கைகளைப் பெறும், இது விரும்பத்தக்கதல்ல. மற்றொரு வழி இருக்க வேண்டும்..."
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "நாம் git ஐ ஒரு commit ஐ மட்டும் நகலெடுக்கச் சொல்ல வேண்டும். இது முந்தைய நிலைகளில் வேலைகளை நகர்த்துவதற்கு மாறுபட்டது - அதே கட்டளைகளை நாம் பயன்படுத்தலாம்:",
+              "",
+              "* `git rebase -i`",
+              "* `git cherry-pick`",
+              "",
+              "இந்த இலக்கை அடைய."
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "இது ஒரு பின்னேட்ட நிலை என்பதால், நீங்கள் எந்த கட்டளையை பயன்படுத்த விரும்புகிறீர்கள் என்பதை நீங்கள் தீர்மானிக்க முடியும், ஆனால் நிலையை முடிக்க, `bugFix` குறிப்பிடும் commit ஐ `main` பெறுவதில் உறுதி செய்யவும்."
+            ]
+          }
+        }
+      ]
+    },
+    "tr_TR": {
+      "childViews": [
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "## Yerel Olarak Birikmiş Commitler",
+              "",
+              "Şu sıkça karşılaşılan bir geliştirme senaryosudur: Bir hatayı izlemeye çalışıyorum, ancak bu hata oldukça belirsiz. Dedektiflik çalışmalarıma yardımcı olmak için bazı hata ayıklama komutları ve yazdırma ifadeleri eklerim.",
+              "",
+              "Bu hata ayıklama veya yazdırma ifadeleri, her biri kendi commit'lerine sahiptir. Sonunda hatayı bulurum, düzeltirim ve sevinirim!",
+              "",
+              "Tek sorun şu ki şimdi `bugFix` branch'imi `main` branch'imden almalıyım. Eğer sadece `main` branch'ini süratle ileri alırsam, `main` branch'i tüm hata ayıklama ifadelerimi alır ki bu istenmeyen bir durumdur. Bunun için başka bir yol bulunmalıdır..."
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Git'e sadece bir commit'i kopyalamasını söylememiz gerekiyor. Bu, daha önce yaptığımız işleri taşımak için yaptığımız işlemler gibi, orada kullandığımız;",
+              "",
+              "* `git rebase -i`",
+              "* `git cherry-pick`",
+              "",
+              "komutlarını burada da kullanabiliriz."
+            ]
+          }
+        },
+        {
+          "type": "ModalAlert",
+          "options": {
+            "markdowns": [
+              "Bu biraz daha ileri bir seviye olduğundan hangi komutu kullanmak istediğiniz size kalmış, ancak `main` branch'inin `bugFix` tarafından atılan ve `main`'e atıfta bulunan commit'i alması gerektiğini unutmayın."
+            ]
+          }
+        }
+      ]
+    }
   }
 };

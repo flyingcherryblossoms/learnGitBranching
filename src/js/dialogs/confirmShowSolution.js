@@ -13,9 +13,9 @@ exports.dialog = {
     type: 'ModalAlert',
     options: {
       markdowns: [
-        '## Bist du sicher, dass du die Auflösung sehen willst?',
+        '## Bist du sicher, dass du die Lösung sehen willst?',
         '',
-        'Ich glaube an dich! Du schaffst das!'
+        'Ich glaube an dich! Du schaffst das schon!'
       ]
     }
   }],
@@ -105,16 +105,22 @@ exports.dialog = {
       markdowns: [
         '## どうしても正解がみたいですか?',
         '',
-        '頑張れ頑張れできるできる絶対できる頑張れもっとやれるって',
-        '',
-        'やれる気持ちの問題だ頑張れ頑張れそこだ！',
-        '',
-        'そこで諦めるな絶対に頑張れ積極的にポジティブに頑張る頑張る',
-        '',
-        '北京だって頑張ってるんだから！'
+        'あなたならきっとできるって信じてます!'
       ]
     }
   }],
+  'ro': [
+    {
+      type: "ModalAlert",
+      options: {
+        markdowns: [
+          "## Ești sigur că vrei să vezi soluția?",
+          "",
+          "Am încredere în tine! Poți să o faci!",
+        ],
+      },
+    },
+  ],
   'ru_RU': [{
     type: 'ModalAlert',
     options: {
@@ -187,6 +193,16 @@ exports.dialog = {
       },
     },
   ],
+  'tr_TR': [{
+    type: 'ModalAlert',
+    options: {
+      markdowns: [
+        '## Çözümü görmek istediğine emin misin?',
+        '',
+        'Sana inanıyorum bunu yapabilirsin!'
+      ]
+    }
+  }],
 };
 
 
